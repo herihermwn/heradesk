@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+bun.lock
+
+# Build output
+dist/
+build/
+
+# Generated CSS
+dashboard/src/styles.css
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Prisma
+prisma/migrations/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Testing
+coverage/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
