@@ -74,7 +74,7 @@ function ChatHeader({ chat, onResolve, onShowTransfer }: ChatHeaderProps) {
           onClick={onResolve}
           className="px-3 py-1.5 text-sm bg-green-500 text-white hover:bg-green-600 rounded-lg transition-colors"
         >
-          Selesaikan
+          Resolve
         </button>
       </div>
     </div>
@@ -109,12 +109,12 @@ function TransferModal({ isOpen, onClose, onTransfer, onlineCS }: TransferModalP
         <div className="p-4">
           {availableCS.length === 0 ? (
             <p className="text-gray-500 text-center py-4">
-              Tidak ada CS lain yang tersedia saat ini
+              No other CS agents are available at this time
             </p>
           ) : (
             <div className="space-y-2">
               <p className="text-sm text-gray-600 mb-3">
-                Pilih CS untuk menerima chat ini:
+                Select a CS to receive this chat:
               </p>
               {availableCS.map((cs) => (
                 <label
@@ -172,7 +172,7 @@ function TransferModal({ isOpen, onClose, onTransfer, onlineCS }: TransferModalP
             onClick={onClose}
             className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
           >
-            Batal
+            Cancel
           </button>
           <button
             onClick={handleTransfer}
@@ -205,21 +205,21 @@ function ResolveModal({ isOpen, onClose, onResolve }: ResolveModalProps) {
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="bg-white rounded-xl shadow-xl w-full max-w-md mx-4">
         <div className="p-4 border-b">
-          <h3 className="text-lg font-semibold">Selesaikan Chat</h3>
+          <h3 className="text-lg font-semibold">Resolve Chat</h3>
         </div>
 
         <div className="p-4">
           <p className="text-gray-600 mb-3">
-            Apakah Anda yakin ingin menyelesaikan chat ini?
+            Are you sure you want to resolve this chat?
           </p>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Catatan (opsional)
+              Notes (optional)
             </label>
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              placeholder="Tambahkan catatan untuk chat ini..."
+              placeholder="Add notes for this chat..."
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
               rows={3}
             />
@@ -231,13 +231,13 @@ function ResolveModal({ isOpen, onClose, onResolve }: ResolveModalProps) {
             onClick={onClose}
             className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
           >
-            Batal
+            Cancel
           </button>
           <button
             onClick={handleResolve}
             className="px-4 py-2 bg-green-500 text-white hover:bg-green-600 rounded-lg transition-colors"
           >
-            Selesaikan
+            Resolve
           </button>
         </div>
       </div>
@@ -320,10 +320,10 @@ function EmptyState() {
           </svg>
         </div>
         <h3 className="text-lg font-medium text-gray-700 mb-1">
-          Pilih Chat
+          Select Chat
         </h3>
         <p className="text-gray-500">
-          Pilih chat dari daftar untuk memulai percakapan
+          Select a chat from the list to start a conversation
         </p>
       </div>
     </div>
@@ -339,7 +339,7 @@ function LoadingState() {
     <div className="flex-1 flex items-center justify-center bg-gray-50">
       <div className="flex flex-col items-center gap-3">
         <div className="w-8 h-8 border-2 border-primary-500 border-t-transparent rounded-full animate-spin" />
-        <p className="text-gray-500">Memuat chat...</p>
+        <p className="text-gray-500">Loading chat...</p>
       </div>
     </div>
   );
@@ -399,14 +399,14 @@ export function ChatRoom({
         <div className="p-4 border-t bg-orange-50">
           <div className="text-center">
             <p className="text-sm text-orange-700 mb-3">
-              Chat ini masih dalam antrian. Terima chat untuk mulai membalas.
+              This chat is still in queue. Accept the chat to start replying.
             </p>
             {onAccept && (
               <button
                 onClick={onAccept}
                 className="px-6 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors font-medium"
               >
-                Terima Chat
+                Accept Chat
               </button>
             )}
           </div>
@@ -449,7 +449,7 @@ export function ChatRoom({
           <MessageInput
             onSend={onSendMessage}
             onTyping={onTyping}
-            placeholder="Ketik pesan..."
+            placeholder="Type a message..."
           />
         </div>
       )}

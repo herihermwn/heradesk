@@ -42,7 +42,7 @@ function ChatItem({ chat, isSelected, onClick, onAccept, isQueue }: ChatItemProp
     const diffMs = now.getTime() - date.getTime();
     const diffMins = Math.floor(diffMs / 60000);
 
-    if (diffMins < 1) return "Baru saja";
+    if (diffMins < 1) return "Just now";
     if (diffMins < 60) return `${diffMins}m`;
 
     const diffHours = Math.floor(diffMins / 60);
@@ -83,7 +83,7 @@ function ChatItem({ chat, isSelected, onClick, onAccept, isQueue }: ChatItemProp
           {lastMessage && (
             <p className="text-sm text-gray-500 truncate mt-0.5">
               {lastMessage.senderType === "cs" && (
-                <span className="text-primary-600">Anda: </span>
+                <span className="text-primary-600">You: </span>
               )}
               {lastMessage.content}
             </p>
@@ -92,7 +92,7 @@ function ChatItem({ chat, isSelected, onClick, onAccept, isQueue }: ChatItemProp
           {chat.status === "waiting" && (
             <div className="flex items-center gap-2 mt-2">
               <span className="text-xs text-orange-600 bg-orange-50 px-2 py-0.5 rounded">
-                Menunggu
+                Waiting
               </span>
               {isQueue && onAccept && (
                 <button
@@ -102,7 +102,7 @@ function ChatItem({ chat, isSelected, onClick, onAccept, isQueue }: ChatItemProp
                   }}
                   className="text-xs bg-primary-500 text-white px-2 py-0.5 rounded hover:bg-primary-600 transition-colors"
                 >
-                  Terima
+                  Accept
                 </button>
               )}
             </div>
@@ -157,7 +157,7 @@ export function ChatList({
   onSelect,
   onAccept,
   isQueue = false,
-  emptyMessage = "Tidak ada chat",
+  emptyMessage = "No chats",
 }: ChatListProps) {
   return (
     <div className="flex flex-col h-full">
