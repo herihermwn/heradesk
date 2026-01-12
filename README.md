@@ -1,6 +1,18 @@
 # HeraDesk
 
-Customer Service Chat Application built with Bun.js, React 19, and PostgreSQL.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Bun](https://img.shields.io/badge/Bun-1.0+-black.svg)](https://bun.sh)
+[![React](https://img.shields.io/badge/React-19-61dafb.svg)](https://react.dev)
+
+**Open Source Customer Service System** - Sistem live chat real-time untuk customer service yang mudah digunakan dan dikembangkan.
+
+[Live Demo](https://heradesk.heri.dev) · [Report Bug](https://github.com/herihermwn/heradesk/issues) · [Request Feature](https://github.com/herihermwn/heradesk/issues)
+
+---
+
+## About
+
+HeraDesk adalah sistem customer service open source yang dibangun dengan teknologi modern. Cocok untuk bisnis yang membutuhkan fitur live chat dengan pelanggan tanpa bergantung pada layanan pihak ketiga.
 
 ## Features
 
@@ -205,6 +217,24 @@ After running `bun run db:seed`, the following accounts are available:
 | `S3_SECRET_KEY` | S3 secret key | - |
 | `MAX_CHAT_PER_CS` | Max concurrent chats per CS | 5 |
 
+## Contributing
+
+Kontribusi sangat diterima! Jika Anda ingin berkontribusi:
+
+1. Fork repository ini
+2. Buat branch fitur baru (`git checkout -b feature/AmazingFeature`)
+3. Commit perubahan Anda (`git commit -m 'Add some AmazingFeature'`)
+4. Push ke branch (`git push origin feature/AmazingFeature`)
+5. Buat Pull Request
+
+## Support
+
+Jika Anda menemukan bug atau memiliki saran, silakan buat [issue](https://github.com/herihermwn/heradesk/issues) di GitHub.
+
 ## License
 
-MIT
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+Made with ❤️ by [Heri Hermawan](https://github.com/herihermwn)
