@@ -49,7 +49,7 @@ async function verifySignature(data: string, signature: string): Promise<boolean
     ["verify"]
   );
   const signatureBytes = base64UrlDecode(signature);
-  return crypto.subtle.verify("HMAC", key, signatureBytes, encoder.encode(data));
+  return crypto.subtle.verify("HMAC", key, signatureBytes as BufferSource, encoder.encode(data));
 }
 
 export async function signToken(payload: Omit<JWTPayload, "iat" | "exp">): Promise<string> {

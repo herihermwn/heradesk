@@ -1,64 +1,122 @@
 import type { ServerWebSocket } from "bun";
+import { parseMessage, CUSTOMER_EVENTS, CS_EVENTS, ADMIN_EVENTS } from "./events";
+import {
+  subscribeToRooms,
+  unsubscribeFromRooms,
+  trackConnection,
+  untrackConnection,
+} from "./rooms";
+
+// Import customer handlers
+import {
+  handleCustomerStartChat,
+  handleCustomerSendMessage,
+  handleCustomerTyping,
+  handleCustomerEndChat,
+  handleCustomerRating,
+  handleCustomerDisconnect,
+  handleCustomerReconnect,
+} from "./messages/customer";
+
+// Import CS handlers
+import {
+  handleCsSetStatus,
+  handleCsAcceptChat,
+  handleCsSendMessage,
+  handleCsTyping,
+  handleCsResolveChat,
+  handleCsTransferChat,
+  handleCsDisconnect,
+  handleCsConnect,
+} from "./messages/cs";
+
+// ============================================
+// TYPES
+// ============================================
 
 export type WebSocketData = {
   role: "customer" | "cs" | "admin";
   userId?: string;
   sessionId?: string;
   customerToken?: string;
+  connectionId?: string;
 };
+
+// ============================================
+// WEBSOCKET HANDLER
+// ============================================
 
 export const websocketHandler = {
   open(ws: ServerWebSocket<WebSocketData>) {
-    const { role, userId, sessionId } = ws.data;
+    const { role, userId, sessionId, customerToken } = ws.data;
 
     console.log(`[WebSocket] Connection opened: ${role}`);
 
-    if (role === "customer" && sessionId) {
-      ws.subscribe(`session:${sessionId}`);
+    // Track connection
+    const connectionId = trackConnection(ws);
+    ws.data.connectionId = connectionId;
+
+    // Subscribe to appropriate rooms
+    subscribeToRooms(ws);
+
+    // Role-specific initialization
+    if (role === "customer" && customerToken) {
+      // Customer reconnecting with existing token
+      handleCustomerReconnect(ws, customerToken);
     } else if (role === "cs" && userId) {
-      ws.subscribe(`cs:${userId}`);
-      ws.subscribe("queue");
+      // CS connected - send initial data
+      handleCsConnect(ws);
     } else if (role === "admin") {
-      ws.subscribe("admin:stats");
-      ws.subscribe("queue");
+      // Admin connected - could send initial stats
+      console.log(`[WebSocket] Admin connected`);
     }
   },
 
   message(ws: ServerWebSocket<WebSocketData>, raw: string | Buffer) {
-    try {
-      const message = JSON.parse(raw.toString());
-      console.log(`[WebSocket] Message received:`, message);
+    const message = parseMessage(raw);
 
-      switch (message.event) {
-        case "customer:send_message":
-          handleCustomerMessage(ws, message.data);
-          break;
-        case "cs:send_message":
-          handleCsMessage(ws, message.data);
-          break;
-        case "cs:set_status":
-          handleCsStatus(ws, message.data);
-          break;
-        default:
-          console.log(`[WebSocket] Unknown event: ${message.event}`);
-      }
-    } catch (error) {
-      console.error("[WebSocket] Failed to parse message:", error);
+    if (!message) {
+      console.error("[WebSocket] Failed to parse message");
+      return;
+    }
+
+    console.log(`[WebSocket] Message received:`, message.event);
+
+    const { role } = ws.data;
+
+    // Route message to appropriate handler based on role and event
+    switch (role) {
+      case "customer":
+        handleCustomerEvent(ws, message.event, message.data);
+        break;
+      case "cs":
+        handleCsEvent(ws, message.event, message.data);
+        break;
+      case "admin":
+        handleAdminEvent(ws, message.event, message.data);
+        break;
+      default:
+        console.log(`[WebSocket] Unknown role: ${role}`);
     }
   },
 
   close(ws: ServerWebSocket<WebSocketData>) {
-    const { role, sessionId, userId } = ws.data;
+    const { role, connectionId } = ws.data;
     console.log(`[WebSocket] Connection closed: ${role}`);
 
-    if (role === "customer" && sessionId) {
-      ws.publish(
-        `session:${sessionId}`,
-        JSON.stringify({
-          event: "chat:customer_left",
-          data: { sessionId },
-        })
-      );
+    // Unsubscribe from rooms
+    unsubscribeFromRooms(ws);
+
+    // Untrack connection
+    if (connectionId) {
+      untrackConnection(connectionId);
+    }
+
+    // Role-specific cleanup
+    if (role === "customer") {
+      handleCustomerDisconnect(ws);
+    } else if (role === "cs") {
+      handleCsDisconnect(ws);
     }
   },
 
@@ -67,18 +125,80 @@ export const websocketHandler = {
   },
 };
 
-// Handler functions (to be implemented)
-function handleCustomerMessage(ws: ServerWebSocket<WebSocketData>, data: any) {
-  // TODO: Implement customer message handling
-  console.log("[WebSocket] Customer message:", data);
+// ============================================
+// EVENT ROUTERS
+// ============================================
+
+function handleCustomerEvent(
+  ws: ServerWebSocket<WebSocketData>,
+  event: string,
+  data: any
+) {
+  switch (event) {
+    case CUSTOMER_EVENTS.START_CHAT:
+      handleCustomerStartChat(ws, data);
+      break;
+    case CUSTOMER_EVENTS.SEND_MESSAGE:
+      handleCustomerSendMessage(ws, data);
+      break;
+    case CUSTOMER_EVENTS.TYPING:
+      handleCustomerTyping(ws, data);
+      break;
+    case CUSTOMER_EVENTS.END_CHAT:
+      handleCustomerEndChat(ws, data);
+      break;
+    case CUSTOMER_EVENTS.RATING:
+      handleCustomerRating(ws, data);
+      break;
+    default:
+      console.log(`[WebSocket] Unknown customer event: ${event}`);
+  }
 }
 
-function handleCsMessage(ws: ServerWebSocket<WebSocketData>, data: any) {
-  // TODO: Implement CS message handling
-  console.log("[WebSocket] CS message:", data);
+function handleCsEvent(
+  ws: ServerWebSocket<WebSocketData>,
+  event: string,
+  data: any
+) {
+  switch (event) {
+    case CS_EVENTS.SET_STATUS:
+      handleCsSetStatus(ws, data);
+      break;
+    case CS_EVENTS.ACCEPT_CHAT:
+      handleCsAcceptChat(ws, data);
+      break;
+    case CS_EVENTS.SEND_MESSAGE:
+      handleCsSendMessage(ws, data);
+      break;
+    case CS_EVENTS.TYPING:
+      handleCsTyping(ws, data);
+      break;
+    case CS_EVENTS.RESOLVE_CHAT:
+      handleCsResolveChat(ws, data);
+      break;
+    case CS_EVENTS.TRANSFER_CHAT:
+      handleCsTransferChat(ws, data);
+      break;
+    default:
+      console.log(`[WebSocket] Unknown CS event: ${event}`);
+  }
 }
 
-function handleCsStatus(ws: ServerWebSocket<WebSocketData>, data: any) {
-  // TODO: Implement CS status handling
-  console.log("[WebSocket] CS status change:", data);
+function handleAdminEvent(
+  ws: ServerWebSocket<WebSocketData>,
+  event: string,
+  data: any
+) {
+  switch (event) {
+    case ADMIN_EVENTS.SUBSCRIBE_STATS:
+      // Already subscribed on connect
+      console.log(`[WebSocket] Admin subscribed to stats`);
+      break;
+    case ADMIN_EVENTS.FORCE_ASSIGN:
+      // TODO: Implement force assign
+      console.log(`[WebSocket] Admin force assign:`, data);
+      break;
+    default:
+      console.log(`[WebSocket] Unknown admin event: ${event}`);
+  }
 }
