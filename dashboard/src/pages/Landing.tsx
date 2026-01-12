@@ -493,14 +493,14 @@ function HowItWorksSection() {
 
 function BenefitsSection() {
   const benefits = [
-    "Respond to customers faster with real-time chat",
-    "Increase customer satisfaction with professional service",
-    "Handle multiple chats with queue system",
-    "Monitor team performance with dashboard analytics",
-    "Save time with canned responses",
-    "Transfer chats between CS easily",
-    "Chat history stored for reference",
-    "Real-time notifications for new chats",
+    "7x faster WebSocket with Bun.js runtime",
+    "Ultra-low latency real-time messaging",
+    "Handle thousands of concurrent connections",
+    "Type-safe codebase with TypeScript",
+    "Modern React 19 with latest features",
+    "Prisma ORM for reliable database operations",
+    "Easy to deploy and self-host",
+    "100% open source - MIT License",
   ];
 
   return (
@@ -512,7 +512,7 @@ function BenefitsSection() {
               Why Choose HeraDesk?
             </h2>
             <p className="text-xl text-white/80 mb-8">
-              HeraDesk is designed to help businesses provide better customer service - completely open source.
+              Built for performance with Bun.js - the fastest JavaScript runtime for real-time applications.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-4">
