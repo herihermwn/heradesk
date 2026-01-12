@@ -184,7 +184,7 @@ export function AdminProvider({ children, token }: AdminProviderProps) {
         });
       }
     } catch (error) {
-      dispatch({ type: "SET_ERROR", payload: "Gagal memuat data user" });
+      dispatch({ type: "SET_ERROR", payload: "Failed to load users" });
     } finally {
       dispatch({ type: "SET_LOADING", payload: false });
     }
@@ -198,11 +198,11 @@ export function AdminProvider({ children, token }: AdminProviderProps) {
         dispatch({ type: "ADD_USER", payload: response.data });
         return true;
       } else {
-        dispatch({ type: "SET_ERROR", payload: response.message || "Gagal membuat user" });
+        dispatch({ type: "SET_ERROR", payload: response.message || "Failed to create user" });
         return false;
       }
     } catch (error) {
-      dispatch({ type: "SET_ERROR", payload: "Gagal membuat user" });
+      dispatch({ type: "SET_ERROR", payload: "Failed to create user" });
       return false;
     }
   }, []);
@@ -215,11 +215,11 @@ export function AdminProvider({ children, token }: AdminProviderProps) {
         dispatch({ type: "UPDATE_USER", payload: response.data });
         return true;
       } else {
-        dispatch({ type: "SET_ERROR", payload: response.message || "Gagal memperbarui user" });
+        dispatch({ type: "SET_ERROR", payload: response.message || "Failed to update user" });
         return false;
       }
     } catch (error) {
-      dispatch({ type: "SET_ERROR", payload: "Gagal memperbarui user" });
+      dispatch({ type: "SET_ERROR", payload: "Failed to update user" });
       return false;
     }
   }, []);
@@ -232,11 +232,11 @@ export function AdminProvider({ children, token }: AdminProviderProps) {
         dispatch({ type: "REMOVE_USER", payload: id });
         return true;
       } else {
-        dispatch({ type: "SET_ERROR", payload: response.message || "Gagal menghapus user" });
+        dispatch({ type: "SET_ERROR", payload: response.message || "Failed to delete user" });
         return false;
       }
     } catch (error) {
-      dispatch({ type: "SET_ERROR", payload: "Gagal menghapus user" });
+      dispatch({ type: "SET_ERROR", payload: "Failed to delete user" });
       return false;
     }
   }, []);
@@ -270,7 +270,7 @@ export function AdminProvider({ children, token }: AdminProviderProps) {
         });
       }
     } catch (error) {
-      dispatch({ type: "SET_ERROR", payload: "Gagal memuat data chat" });
+      dispatch({ type: "SET_ERROR", payload: "Failed to load chats" });
     } finally {
       dispatch({ type: "SET_LOADING", payload: false });
     }
@@ -303,7 +303,7 @@ export function AdminProvider({ children, token }: AdminProviderProps) {
         },
       });
     } catch (error) {
-      dispatch({ type: "SET_ERROR", payload: "Gagal memuat log aktivitas" });
+      dispatch({ type: "SET_ERROR", payload: "Failed to load activity logs" });
     } finally {
       dispatch({ type: "SET_LOADING", payload: false });
     }
@@ -321,8 +321,8 @@ export function AdminProvider({ children, token }: AdminProviderProps) {
           businessHoursEnabled: false,
           businessHoursStart: "08:00",
           businessHoursEnd: "17:00",
-          offlineMessage: "Terima kasih sudah menghubungi kami.",
-          welcomeMessage: "Halo! Ada yang bisa kami bantu?",
+          offlineMessage: "Thank you for contacting us.",
+          welcomeMessage: "Hello! How can we help you?",
         },
       });
     } catch (error) {
@@ -337,7 +337,7 @@ export function AdminProvider({ children, token }: AdminProviderProps) {
       dispatch({ type: "SET_SETTINGS", payload: settings });
       return true;
     } catch (error) {
-      dispatch({ type: "SET_ERROR", payload: "Gagal menyimpan pengaturan" });
+      dispatch({ type: "SET_ERROR", payload: "Failed to save settings" });
       return false;
     }
   }, []);

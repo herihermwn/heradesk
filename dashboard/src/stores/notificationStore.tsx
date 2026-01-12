@@ -169,10 +169,10 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
     (sessionId: string, customerName?: string) => {
       addNotification(
         "chat",
-        "Chat Baru",
+        "New Chat",
         customerName
-          ? `${customerName} memulai chat baru`
-          : "Ada chat baru di antrian",
+          ? `${customerName} started a new chat`
+          : "New chat in queue",
         `/cs?session=${sessionId}`,
         { sessionId }
       );
@@ -184,7 +184,7 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
     (sessionId: string, content: string) => {
       addNotification(
         "chat",
-        "Pesan Baru",
+        "New Message",
         content.length > 50 ? content.substring(0, 50) + "..." : content,
         `/cs?session=${sessionId}`,
         { sessionId }
@@ -197,8 +197,8 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
     (sessionId: string) => {
       addNotification(
         "info",
-        "Chat Diterima",
-        "Anda menerima chat baru. Silakan mulai percakapan.",
+        "Chat Assigned",
+        "You have received a new chat. Please start the conversation.",
         `/cs?session=${sessionId}`,
         { sessionId }
       );
@@ -210,8 +210,8 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
     (sessionId: string, fromName: string) => {
       addNotification(
         "info",
-        "Chat Ditransfer",
-        `Chat ditransfer dari ${fromName}`,
+        "Chat Transferred",
+        `Chat transferred from ${fromName}`,
         `/cs?session=${sessionId}`,
         { sessionId }
       );
@@ -337,7 +337,7 @@ export function NotificationList() {
             d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
           />
         </svg>
-        <p>Tidak ada notifikasi</p>
+        <p>No notifications</p>
       </div>
     );
   }
@@ -387,7 +387,7 @@ export function NotificationList() {
     const hours = Math.floor(diff / 3600000);
     const days = Math.floor(diff / 86400000);
 
-    if (minutes < 1) return "Baru saja";
+    if (minutes < 1) return "Just now";
     if (minutes < 60) return `${minutes} menit lalu`;
     if (hours < 24) return `${hours} jam lalu`;
     return `${days} hari lalu`;
@@ -403,13 +403,13 @@ export function NotificationList() {
             onClick={markAllAsRead}
             className="text-xs text-primary-600 hover:text-primary-700"
           >
-            Tandai semua dibaca
+            Mark all as read
           </button>
           <button
             onClick={clearAll}
             className="text-xs text-gray-500 hover:text-gray-700"
           >
-            Hapus semua
+            Clear all
           </button>
         </div>
       </div>

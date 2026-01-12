@@ -184,7 +184,7 @@ export function ChatProvider({ children, token }: ChatProviderProps) {
         dispatch({ type: "SET_ACTIVE_CHATS", payload: response.data });
       }
     } catch (error) {
-      dispatch({ type: "SET_ERROR", payload: "Gagal memuat chat aktif" });
+      dispatch({ type: "SET_ERROR", payload: "Failed to load active chats" });
     } finally {
       dispatch({ type: "SET_LOADING", payload: false });
     }
@@ -265,7 +265,7 @@ export function ChatProvider({ children, token }: ChatProviderProps) {
         });
       }
     } catch (error) {
-      dispatch({ type: "SET_ERROR", payload: "Gagal memuat detail chat" });
+      dispatch({ type: "SET_ERROR", payload: "Failed to load chat details" });
     } finally {
       dispatch({ type: "SET_LOADING_MESSAGES", payload: false });
     }
@@ -288,7 +288,7 @@ export function ChatProvider({ children, token }: ChatProviderProps) {
       }
       return false;
     } catch (error) {
-      dispatch({ type: "SET_ERROR", payload: "Gagal menerima chat" });
+      dispatch({ type: "SET_ERROR", payload: "Failed to accept chat" });
       return false;
     }
   }, [loadActiveChats, loadQueue, selectChat]);
@@ -304,7 +304,7 @@ export function ChatProvider({ children, token }: ChatProviderProps) {
       }
       return false;
     } catch (error) {
-      dispatch({ type: "SET_ERROR", payload: "Gagal menyelesaikan chat" });
+      dispatch({ type: "SET_ERROR", payload: "Failed to resolve chat" });
       return false;
     }
   }, [loadStats]);
@@ -319,7 +319,7 @@ export function ChatProvider({ children, token }: ChatProviderProps) {
       }
       return false;
     } catch (error) {
-      dispatch({ type: "SET_ERROR", payload: "Gagal transfer chat" });
+      dispatch({ type: "SET_ERROR", payload: "Failed to transfer chat" });
       return false;
     }
   }, []);
@@ -334,7 +334,7 @@ export function ChatProvider({ children, token }: ChatProviderProps) {
       }
       return false;
     } catch (error) {
-      dispatch({ type: "SET_ERROR", payload: "Gagal update status" });
+      dispatch({ type: "SET_ERROR", payload: "Failed to update status" });
       return false;
     }
   }, []);
@@ -375,7 +375,7 @@ export function ChatProvider({ children, token }: ChatProviderProps) {
       }
       return false;
     } catch (error) {
-      dispatch({ type: "SET_ERROR", payload: "Gagal membuat canned response" });
+      dispatch({ type: "SET_ERROR", payload: "Failed to create canned response" });
       return false;
     }
   }, [loadCannedResponses]);
@@ -390,7 +390,7 @@ export function ChatProvider({ children, token }: ChatProviderProps) {
       }
       return false;
     } catch (error) {
-      dispatch({ type: "SET_ERROR", payload: "Gagal menghapus canned response" });
+      dispatch({ type: "SET_ERROR", payload: "Failed to delete canned response" });
       return false;
     }
   }, [loadCannedResponses]);
@@ -442,7 +442,7 @@ export function ChatProvider({ children, token }: ChatProviderProps) {
             id: `system-${Date.now()}`,
             sessionId: data.sessionId,
             senderType: "system",
-            content: "Customer telah keluar dari chat",
+            content: "Customer has left the chat",
             messageType: "system",
             createdAt: new Date().toISOString(),
           },
