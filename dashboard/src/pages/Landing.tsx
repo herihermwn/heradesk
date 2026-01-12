@@ -259,8 +259,8 @@ function FeaturesSection() {
   const features = [
     {
       icon: <Icons.Lightning />,
-      title: "Real-time Chat",
-      description: "Real-time conversations with customers using WebSocket for a responsive experience."
+      title: "Blazing Fast WebSocket",
+      description: "Built with Bun.js for 7x more WebSocket throughput. Real-time conversations with ultra-low latency."
     },
     {
       icon: <Icons.Users />,
@@ -318,6 +318,106 @@ function FeaturesSection() {
               </p>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TechStackSection() {
+  const techs = [
+    {
+      name: "Bun.js",
+      description: "7x faster WebSocket throughput",
+      icon: (
+        <svg className="w-8 h-8" viewBox="0 0 80 80" fill="none">
+          <circle cx="40" cy="40" r="40" fill="#fbf0df"/>
+          <ellipse cx="40" cy="42" rx="28" ry="24" fill="#f9d48b"/>
+          <ellipse cx="32" cy="38" rx="4" ry="5" fill="#3d3d3d"/>
+          <ellipse cx="48" cy="38" rx="4" ry="5" fill="#3d3d3d"/>
+          <path d="M32 50 Q40 56 48 50" stroke="#3d3d3d" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
+        </svg>
+      ),
+      link: "https://bun.sh"
+    },
+    {
+      name: "React 19",
+      description: "Modern UI framework",
+      icon: (
+        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="#61dafb">
+          <circle cx="12" cy="12" r="2.5"/>
+          <ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="#61dafb" strokeWidth="1"/>
+          <ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="#61dafb" strokeWidth="1" transform="rotate(60 12 12)"/>
+          <ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="#61dafb" strokeWidth="1" transform="rotate(120 12 12)"/>
+        </svg>
+      ),
+      link: "https://react.dev"
+    },
+    {
+      name: "PostgreSQL",
+      description: "Reliable database",
+      icon: (
+        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="#336791">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+          <path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
+        </svg>
+      ),
+      link: "https://postgresql.org"
+    },
+    {
+      name: "Prisma",
+      description: "Type-safe ORM",
+      icon: (
+        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="#2d3748">
+          <path d="M21.807 18.285L13.553.756a1.324 1.324 0 00-1.129-.754 1.31 1.31 0 00-1.206.626l-8.952 14.5a1.356 1.356 0 00.016 1.455l4.376 6.778a1.408 1.408 0 001.58.581l12.703-3.757c.389-.115.707-.39.873-.755s.164-.783-.007-1.145zm-1.848.752L9.18 22.224a.452.452 0 01-.575-.52l3.516-18.025a.452.452 0 01.847-.107l7.906 16.424a.452.452 0 01-.115.541z"/>
+        </svg>
+      ),
+      link: "https://prisma.io"
+    },
+  ];
+
+  return (
+    <section className="py-16 bg-gray-50 border-y border-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+            Built with Modern Tech Stack
+          </h2>
+          <p className="text-gray-600">
+            Powered by the fastest runtime and best tools for real-time applications
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {techs.map((tech, index) => (
+            <a
+              key={index}
+              href={tech.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white rounded-xl p-6 text-center hover:shadow-lg transition-shadow border border-gray-100 group"
+            >
+              <div className="flex justify-center mb-3 group-hover:scale-110 transition-transform">
+                {tech.icon}
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-1">{tech.name}</h3>
+              <p className="text-sm text-gray-500">{tech.description}</p>
+            </a>
+          ))}
+        </div>
+
+        <div className="mt-8 text-center">
+          <a
+            href="https://bun.sh/blog/bun-v1.3#websocket-improvements"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-medium"
+          >
+            Learn more about Bun.js WebSocket performance
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
         </div>
       </div>
     </section>
@@ -549,6 +649,7 @@ function Landing() {
       <Navbar />
       <HeroSection />
       <FeaturesSection />
+      <TechStackSection />
       <HowItWorksSection />
       <BenefitsSection />
       <Footer />
