@@ -4,7 +4,7 @@
 [![Bun](https://img.shields.io/badge/Bun-1.0+-black.svg)](https://bun.sh)
 [![React](https://img.shields.io/badge/React-19-61dafb.svg)](https://react.dev)
 
-**Open Source Customer Service System** - Sistem live chat real-time untuk customer service yang mudah digunakan dan dikembangkan.
+**Open Source Customer Service System** - A real-time live chat system for customer service that's easy to use and extend.
 
 [Live Demo](https://heradesk.heri.dev) · [Report Bug](https://github.com/herihermwn/heradesk/issues) · [Request Feature](https://github.com/herihermwn/heradesk/issues)
 
@@ -12,27 +12,44 @@
 
 ## About
 
-HeraDesk adalah sistem customer service open source yang dibangun dengan teknologi modern. Cocok untuk bisnis yang membutuhkan fitur live chat dengan pelanggan tanpa bergantung pada layanan pihak ketiga.
+HeraDesk is an open source customer service system built with modern technology. Perfect for businesses that need live chat features with customers without relying on third-party services.
+
+## Why Bun.js?
+
+HeraDesk is built with [Bun.js](https://bun.sh) for maximum WebSocket performance:
+
+- **7x more WebSocket throughput** compared to Node.js ([source](https://bun.sh/blog/bun-v1.3#websocket-improvements))
+- **Ultra-low latency** for real-time messaging
+- **Handle thousands of concurrent connections** efficiently
+- **Native WebSocket support** with optimized memory usage
+
+Learn more about Bun.js WebSocket improvements:
+- [Bun v1.3 WebSocket Improvements](https://bun.sh/blog/bun-v1.3#websocket-improvements)
+- [Bun WebSocket Documentation](https://bun.sh/docs/runtime/http/websockets)
 
 ## Features
 
-- Real-time chat using WebSocket
-- Anonymous customer chat (no registration required)
-- Customer Service dashboard with multiple chat handling
-- Admin dashboard for user management and chat logs
-- JWT-based authentication
-- S3 storage support for file uploads
+- **Blazing Fast WebSocket** - Built with Bun.js for 7x more throughput
+- **Real-time Chat** - Instant messaging with ultra-low latency
+- **Anonymous Customer Chat** - No registration required for customers
+- **Multi-Agent Support** - Handle multiple CS agents with automatic queue
+- **Dashboard Analytics** - Monitor team performance with statistics
+- **Canned Responses** - Quick reply templates for faster response
+- **Chat Transfer** - Transfer chats between CS agents easily
+- **Admin Dashboard** - User management and chat logs
+- **JWT Authentication** - Secure token-based authentication
+- **S3 Storage** - Support for file uploads
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|------------|
-| Runtime | Bun.js |
-| Frontend | React 19, Tailwind CSS |
-| Database | PostgreSQL, Prisma ORM |
-| Authentication | JWT (JSON Web Token) |
-| Real-time | WebSocket |
-| Storage | S3-compatible (NevaObjects) |
+| Layer | Technology | Why? |
+|-------|------------|------|
+| Runtime | [Bun.js](https://bun.sh) | 7x faster WebSocket, native TypeScript |
+| Frontend | [React 19](https://react.dev), Tailwind CSS | Modern UI with latest features |
+| Database | [PostgreSQL](https://postgresql.org), [Prisma ORM](https://prisma.io) | Reliable, type-safe database |
+| Authentication | JWT (JSON Web Token) | Secure, stateless auth |
+| Real-time | Native Bun WebSocket | High performance pub/sub |
+| Storage | S3-compatible | Flexible file storage |
 
 ## Project Structure
 
@@ -219,17 +236,17 @@ After running `bun run db:seed`, the following accounts are available:
 
 ## Contributing
 
-Kontribusi sangat diterima! Jika Anda ingin berkontribusi:
+Contributions are welcome! If you want to contribute:
 
-1. Fork repository ini
-2. Buat branch fitur baru (`git checkout -b feature/AmazingFeature`)
-3. Commit perubahan Anda (`git commit -m 'Add some AmazingFeature'`)
-4. Push ke branch (`git push origin feature/AmazingFeature`)
-5. Buat Pull Request
+1. Fork this repository
+2. Create a new feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Create a Pull Request
 
 ## Support
 
-Jika Anda menemukan bug atau memiliki saran, silakan buat [issue](https://github.com/herihermwn/heradesk/issues) di GitHub.
+If you find a bug or have suggestions, please create an [issue](https://github.com/herihermwn/heradesk/issues) on GitHub.
 
 ## License
 
