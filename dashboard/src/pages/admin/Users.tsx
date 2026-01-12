@@ -43,7 +43,7 @@ function Sidebar() {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
               </svg>
-              <span>Kelola User</span>
+              <span>Manage Users</span>
             </a>
           </li>
           <li>
@@ -66,7 +66,7 @@ function Sidebar() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-              <span>Pengaturan</span>
+              <span>Settings</span>
             </a>
           </li>
         </ul>
@@ -145,7 +145,7 @@ function UserModal({ isOpen, onClose, user, onSubmit, isEdit = false }: UserModa
       <div className="bg-white rounded-xl shadow-xl w-full max-w-md mx-4">
         <div className="p-4 border-b">
           <h3 className="text-lg font-semibold">
-            {isEdit ? "Edit User" : "Tambah User Baru"}
+            {isEdit ? "Edit User" : "Add New User"}
           </h3>
         </div>
 
@@ -165,7 +165,7 @@ function UserModal({ isOpen, onClose, user, onSubmit, isEdit = false }: UserModa
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              {isEdit ? "Password (kosongkan jika tidak diubah)" : "Password"}
+              {isEdit ? "Password (leave blank to keep unchanged)" : "Password"}
             </label>
             <input
               type="password"
@@ -178,7 +178,7 @@ function UserModal({ isOpen, onClose, user, onSubmit, isEdit = false }: UserModa
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Nama Lengkap
+              Full Name
             </label>
             <input
               type="text"
@@ -209,14 +209,14 @@ function UserModal({ isOpen, onClose, user, onSubmit, isEdit = false }: UserModa
               onClick={onClose}
               className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
             >
-              Batal
+              Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
               className="px-4 py-2 bg-primary-500 text-white hover:bg-primary-600 rounded-lg transition-colors disabled:opacity-50"
             >
-              {isSubmitting ? "Menyimpan..." : isEdit ? "Simpan Perubahan" : "Tambah User"}
+              {isSubmitting ? "Saving..." : isEdit ? "Save Changes" : "Add User"}
             </button>
           </div>
         </form>
@@ -243,13 +243,13 @@ function DeleteModal({ isOpen, onClose, onConfirm, userName }: DeleteModalProps)
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="bg-white rounded-xl shadow-xl w-full max-w-md mx-4">
         <div className="p-4 border-b">
-          <h3 className="text-lg font-semibold text-red-600">Hapus User</h3>
+          <h3 className="text-lg font-semibold text-red-600">Delete User</h3>
         </div>
 
         <div className="p-4">
           <p className="text-gray-600">
-            Apakah Anda yakin ingin menghapus user <strong>{userName}</strong>?
-            User yang dihapus tidak akan bisa login lagi.
+            Are you sure you want to delete user <strong>{userName}</strong>?
+            Deleted users will no longer be able to log in.
           </p>
         </div>
 
@@ -258,13 +258,13 @@ function DeleteModal({ isOpen, onClose, onConfirm, userName }: DeleteModalProps)
             onClick={onClose}
             className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
           >
-            Batal
+            Cancel
           </button>
           <button
             onClick={onConfirm}
             className="px-4 py-2 bg-red-500 text-white hover:bg-red-600 rounded-lg transition-colors"
           >
-            Hapus
+            Delete
           </button>
         </div>
       </div>
@@ -330,8 +330,8 @@ function UsersContent() {
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
           <div>
-            <h2 className="text-2xl font-bold text-gray-800">Kelola User</h2>
-            <p className="text-gray-500">Kelola akun admin dan customer service</p>
+            <h2 className="text-2xl font-bold text-gray-800">Manage Users</h2>
+            <p className="text-gray-500">Manage admin and customer service accounts</p>
           </div>
           <button
             onClick={() => setShowCreateModal(true)}
@@ -340,7 +340,7 @@ function UsersContent() {
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
             </svg>
-            Tambah User
+            Add User
           </button>
         </div>
 
@@ -398,7 +398,7 @@ function UsersContent() {
             </div>
           ) : filteredUsers.length === 0 ? (
             <div className="text-center py-12 text-gray-500">
-              Belum ada user yang terdaftar
+              No users registered yet
             </div>
           ) : (
             <table className="w-full">
@@ -408,7 +408,7 @@ function UsersContent() {
                   <th className="text-left px-6 py-3 text-sm font-medium text-gray-500">Username</th>
                   <th className="text-left px-6 py-3 text-sm font-medium text-gray-500">Role</th>
                   <th className="text-left px-6 py-3 text-sm font-medium text-gray-500">Status</th>
-                  <th className="text-right px-6 py-3 text-sm font-medium text-gray-500">Aksi</th>
+                  <th className="text-right px-6 py-3 text-sm font-medium text-gray-500">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y">
@@ -448,7 +448,7 @@ function UsersContent() {
                           ? "bg-green-100 text-green-700"
                           : "bg-gray-100 text-gray-700"
                       }`}>
-                        {user.isActive ? "Aktif" : "Nonaktif"}
+                        {user.isActive ? "Active" : "Inactive"}
                       </span>
                     </td>
                     <td className="px-6 py-4 text-right">
@@ -470,7 +470,7 @@ function UsersContent() {
                           setShowDeleteModal(true);
                         }}
                         className="text-gray-500 hover:text-red-600 p-1 ml-2"
-                        title="Hapus"
+                        title="Delete"
                       >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />

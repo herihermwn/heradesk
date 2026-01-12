@@ -42,7 +42,7 @@ function Sidebar() {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
               </svg>
-              <span>Kelola User</span>
+              <span>Manage Users</span>
             </a>
           </li>
           <li>
@@ -65,7 +65,7 @@ function Sidebar() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-              <span>Pengaturan</span>
+              <span>Settings</span>
             </a>
           </li>
         </ul>
@@ -229,7 +229,7 @@ function DashboardContent() {
         <div className="flex justify-between items-center mb-6">
           <div>
             <h2 className="text-2xl font-bold text-gray-800">Dashboard</h2>
-            <p className="text-gray-500">Selamat datang di Admin HeraDesk</p>
+            <p className="text-gray-500">Welcome to HeraDesk Admin</p>
           </div>
           <button
             onClick={() => {
@@ -260,7 +260,7 @@ function DashboardContent() {
         {/* Stats Cards */}
         <div className="grid grid-cols-4 gap-4 mb-6">
           <StatsCard
-            label="Chat Aktif"
+            label="Active Chats"
             value={store.stats?.activeChats || 0}
             color="primary"
             icon={
@@ -270,7 +270,7 @@ function DashboardContent() {
             }
           />
           <StatsCard
-            label="Dalam Antrian"
+            label="In Queue"
             value={store.stats?.waitingChats || 0}
             color="orange"
             icon={
@@ -280,7 +280,7 @@ function DashboardContent() {
             }
           />
           <StatsCard
-            label="Chat Hari Ini"
+            label="Today's Chats"
             value={store.stats?.todayChats || 0}
             color="blue"
             icon={
@@ -304,18 +304,18 @@ function DashboardContent() {
         {/* CS Status Table */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 mb-6">
           <div className="p-4 border-b">
-            <h3 className="text-lg font-semibold text-gray-800">Status CS</h3>
+            <h3 className="text-lg font-semibold text-gray-800">CS Status</h3>
           </div>
           <div className="overflow-x-auto">
             {store.csUsers.length === 0 ? (
               <div className="text-center text-gray-500 py-8">
-                Belum ada CS yang terdaftar
+                No CS agents registered yet
               </div>
             ) : (
               <table className="w-full">
                 <thead className="bg-gray-50 border-b">
                   <tr>
-                    <th className="text-left px-6 py-3 text-sm font-medium text-gray-500">Nama</th>
+                    <th className="text-left px-6 py-3 text-sm font-medium text-gray-500">Name</th>
                     <th className="text-left px-6 py-3 text-sm font-medium text-gray-500">Status</th>
                     <th className="text-left px-6 py-3 text-sm font-medium text-gray-500">Chats</th>
                     <th className="text-left px-6 py-3 text-sm font-medium text-gray-500">Rating</th>
@@ -352,8 +352,8 @@ function DashboardContent() {
                 </svg>
               </div>
               <div>
-                <h4 className="font-semibold text-gray-800">Kelola User</h4>
-                <p className="text-sm text-gray-500">Tambah dan kelola akun</p>
+                <h4 className="font-semibold text-gray-800">Manage Users</h4>
+                <p className="text-sm text-gray-500">Add and manage accounts</p>
               </div>
             </div>
           </a>
@@ -387,7 +387,7 @@ function DashboardContent() {
                 </svg>
               </div>
               <div>
-                <h4 className="font-semibold text-gray-800">Pengaturan</h4>
+                <h4 className="font-semibold text-gray-800">Settings</h4>
                 <p className="text-sm text-gray-500">Konfigurasi sistem</p>
               </div>
             </div>

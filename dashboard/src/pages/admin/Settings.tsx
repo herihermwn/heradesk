@@ -42,7 +42,7 @@ function Sidebar() {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
               </svg>
-              <span>Kelola User</span>
+              <span>Manage Users</span>
             </a>
           </li>
           <li>
@@ -65,7 +65,7 @@ function Sidebar() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-              <span>Pengaturan</span>
+              <span>Settings</span>
             </a>
           </li>
         </ul>
@@ -101,8 +101,8 @@ function SettingsContent() {
     businessHoursEnabled: false,
     businessHoursStart: "08:00",
     businessHoursEnd: "17:00",
-    offlineMessage: "Terima kasih sudah menghubungi kami. Saat ini kami sedang offline. Silakan tinggalkan pesan dan kami akan menghubungi Anda segera.",
-    welcomeMessage: "Halo! Selamat datang di layanan kami. Ada yang bisa kami bantu?",
+    offlineMessage: "Thank you for contacting us. We are currently offline. Please leave a message and we will get back to you soon.",
+    welcomeMessage: "Hello! Welcome to our service. How can we help you?",
   });
 
   useEffect(() => {
@@ -123,7 +123,7 @@ function SettingsContent() {
 
     setIsSaving(false);
     if (success) {
-      setSuccessMessage("Pengaturan berhasil disimpan");
+      setSuccessMessage("Settings saved successfully");
       setTimeout(() => setSuccessMessage(null), 3000);
     }
   };
@@ -135,8 +135,8 @@ function SettingsContent() {
       <main className="flex-1 p-6">
         {/* Header */}
         <div className="mb-6">
-          <h2 className="text-2xl font-bold text-gray-800">Pengaturan</h2>
-          <p className="text-gray-500">Konfigurasi sistem HeraDesk</p>
+          <h2 className="text-2xl font-bold text-gray-800">Settings</h2>
+          <p className="text-gray-500">HeraDesk system configuration</p>
         </div>
 
         {/* Success Message */}
@@ -161,12 +161,12 @@ function SettingsContent() {
         <div className="space-y-6">
           {/* Chat Settings */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Pengaturan Chat</h3>
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Chat Settings</h3>
 
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Maksimal Chat per CS
+                  Maximum Chats per CS
                 </label>
                 <input
                   type="number"
@@ -177,7 +177,7 @@ function SettingsContent() {
                   className="w-32 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 />
                 <p className="text-sm text-gray-500 mt-1">
-                  Jumlah maksimal chat yang dapat ditangani satu CS secara bersamaan
+                  Maximum number of concurrent chats a CS agent can handle
                 </p>
               </div>
 
@@ -187,7 +187,7 @@ function SettingsContent() {
                     Auto Assignment
                   </label>
                   <p className="text-sm text-gray-500">
-                    Otomatis assign chat ke CS yang tersedia
+                    Automatically assign chats to available CS agents
                   </p>
                 </div>
                 <button
@@ -208,16 +208,16 @@ function SettingsContent() {
 
           {/* Business Hours */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Jam Operasional</h3>
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Business Hours</h3>
 
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
                   <label className="text-sm font-medium text-gray-700">
-                    Aktifkan Jam Operasional
+                    Enable Business Hours
                   </label>
                   <p className="text-sm text-gray-500">
-                    Batasi layanan chat sesuai jam kerja
+                    Limit chat service to business hours
                   </p>
                 </div>
                 <button
@@ -238,7 +238,7 @@ function SettingsContent() {
                 <div className="flex gap-4 pt-2">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Jam Buka
+                      Opening Time
                     </label>
                     <input
                       type="time"
@@ -249,7 +249,7 @@ function SettingsContent() {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Jam Tutup
+                      Closing Time
                     </label>
                     <input
                       type="time"
@@ -265,32 +265,32 @@ function SettingsContent() {
 
           {/* Messages */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Pesan Otomatis</h3>
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Automated Messages</h3>
 
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Pesan Selamat Datang
+                  Welcome Message
                 </label>
                 <textarea
                   value={settings.welcomeMessage}
                   onChange={(e) => setSettings({ ...settings, welcomeMessage: e.target.value })}
                   rows={3}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
-                  placeholder="Pesan yang ditampilkan saat customer memulai chat..."
+                  placeholder="Message displayed when customer starts a chat..."
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Pesan Offline
+                  Offline Message
                 </label>
                 <textarea
                   value={settings.offlineMessage}
                   onChange={(e) => setSettings({ ...settings, offlineMessage: e.target.value })}
                   rows={3}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
-                  placeholder="Pesan yang ditampilkan saat tidak ada CS online..."
+                  placeholder="Message displayed when no CS agents are online..."
                 />
               </div>
             </div>
@@ -306,14 +306,14 @@ function SettingsContent() {
               {isSaving ? (
                 <>
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  Menyimpan...
+                  Saving...
                 </>
               ) : (
                 <>
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  Simpan Pengaturan
+                  Save Settings
                 </>
               )}
             </button>
