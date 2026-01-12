@@ -95,7 +95,7 @@ export function ChatWidget({
       if (token) {
         localStorage.setItem(STORAGE_KEYS.SESSION_TOKEN, token);
       }
-      addSystemMessage("Chat dimulai. Menghubungkan ke agen...");
+      addSystemMessage("Chat started. Connecting to agent...");
     });
 
     // Chat assigned
@@ -139,7 +139,7 @@ export function ChatWidget({
 
     // Error
     const unsubError = ws.on(WS_EVENTS.SERVER.ERROR, (data: any) => {
-      setError(data.message || "Terjadi kesalahan");
+      setError(data.message || "An error occurred");
     });
 
     return () => {
@@ -223,7 +223,7 @@ export function ChatWidget({
       });
     } catch (err) {
       console.error("[ChatWidget] Start chat error:", err);
-      setError("Gagal memulai chat. Silakan coba lagi.");
+      setError("Failed to start chat. Please try again.");
     } finally {
       setIsLoading(false);
     }

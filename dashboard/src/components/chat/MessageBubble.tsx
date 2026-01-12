@@ -173,7 +173,7 @@ export function TypingIndicator({ senderName }: TypingIndicatorProps) {
       </div>
       {senderName && (
         <span className="text-xs text-gray-500 self-end">
-          {senderName} sedang mengetik...
+          {senderName} is typing...
         </span>
       )}
     </div>

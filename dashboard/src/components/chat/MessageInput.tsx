@@ -23,7 +23,7 @@ export function MessageInput({
   onSend,
   onTyping,
   onAttach,
-  placeholder = "Ketik pesan...",
+  placeholder = "Type a message...",
   disabled = false,
   maxLength = 2000,
   showAttachButton = false,
@@ -269,7 +269,7 @@ export function CannedResponseSelector({
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Cari balasan cepat..."
+          placeholder="Search quick replies..."
           className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-primary"
           autoFocus
         />
