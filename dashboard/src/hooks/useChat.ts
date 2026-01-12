@@ -145,7 +145,7 @@ export function useChat(token?: string): UseChatReturn {
                 id: `system-${Date.now()}`,
                 sessionId: data.sessionId,
                 senderType: "system" as const,
-                content: "Customer telah keluar dari chat",
+                content: "Customer has left the chat",
                 messageType: "text" as const,
                 createdAt: new Date().toISOString(),
               },
@@ -206,7 +206,7 @@ export function useChat(token?: string): UseChatReturn {
     } catch (error) {
       setState((prev) => ({
         ...prev,
-        error: "Gagal memuat chat",
+        error: "Failed to load chats",
         isLoading: false,
       }));
     }
@@ -243,7 +243,7 @@ export function useChat(token?: string): UseChatReturn {
     } catch (error) {
       setState((prev) => ({
         ...prev,
-        error: "Gagal memuat detail chat",
+        error: "Failed to load chat details",
         isLoading: false,
       }));
     }
@@ -263,7 +263,7 @@ export function useChat(token?: string): UseChatReturn {
       } catch (error) {
         setState((prev) => ({
           ...prev,
-          error: "Gagal menerima chat",
+          error: "Failed to accept chat",
           isLoading: false,
         }));
       }
@@ -290,7 +290,7 @@ export function useChat(token?: string): UseChatReturn {
       } catch (error) {
         setState((prev) => ({
           ...prev,
-          error: "Gagal menyelesaikan chat",
+          error: "Failed to resolve chat",
           isLoading: false,
         }));
       }
@@ -317,7 +317,7 @@ export function useChat(token?: string): UseChatReturn {
       } catch (error) {
         setState((prev) => ({
           ...prev,
-          error: "Gagal transfer chat",
+          error: "Failed to transfer chat",
           isLoading: false,
         }));
       }
