@@ -6,7 +6,7 @@
 
 **Open Source Customer Service System** - A real-time live chat system for customer service that's easy to use and extend.
 
-[Live Demo](https://heradesk.heri.dev) · [Report Bug](https://github.com/herihermwn/heradesk/issues) · [Request Feature](https://github.com/herihermwn/heradesk/issues)
+[Live Demo](https://heradesk.herani.id) · [Report Bug](https://github.com/herihermwn/heradesk/issues) · [Request Feature](https://github.com/herihermwn/heradesk/issues)
 
 ---
 
