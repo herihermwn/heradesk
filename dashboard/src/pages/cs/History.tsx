@@ -115,9 +115,9 @@ function ChatDetailModal({ chat, onClose }: ChatDetailModalProps) {
                 }`}
               >
                 {chat.status === "resolved"
-                  ? "Selesai"
+                  ? "Resolved"
                   : chat.status === "abandoned"
-                  ? "Ditinggalkan"
+                  ? "Abandoned"
                   : chat.status}
               </span>
             </div>
@@ -141,7 +141,7 @@ function ChatDetailModal({ chat, onClose }: ChatDetailModalProps) {
                   ))}
                 </div>
               ) : (
-                <p className="text-gray-400">Belum dinilai</p>
+                <p className="text-gray-400">Not rated</p>
               )}
             </div>
           </div>
@@ -161,7 +161,7 @@ function ChatDetailModal({ chat, onClose }: ChatDetailModalProps) {
             </div>
           ) : messages.length === 0 ? (
             <p className="text-center text-gray-500 py-8">
-              Tidak ada pesan dalam chat ini
+              No messages in this chat
             </p>
           ) : (
             messages.map((message) => (
@@ -279,9 +279,9 @@ function HistoryRow({ chat, onClick }: HistoryRowProps) {
           }`}
         >
           {chat.status === "resolved"
-            ? "Selesai"
+            ? "Resolved"
             : chat.status === "abandoned"
-            ? "Ditinggalkan"
+            ? "Abandoned"
             : chat.status}
         </span>
       </td>
@@ -370,7 +370,7 @@ function Sidebar() {
                   d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <span>Riwayat Chat</span>
+              <span>Chat History</span>
             </a>
           </li>
         </ul>
@@ -431,7 +431,7 @@ function CsHistoryPage() {
     } catch (error) {
       setState((prev) => ({
         ...prev,
-        error: "Gagal memuat riwayat chat",
+        error: "Failed to load chat history",
         isLoading: false,
       }));
     }
@@ -453,9 +453,9 @@ function CsHistoryPage() {
 
       <main className="flex-1 p-6">
         <div className="mb-6">
-          <h2 className="text-2xl font-bold text-gray-800">Riwayat Chat</h2>
+          <h2 className="text-2xl font-bold text-gray-800">Chat History</h2>
           <p className="text-gray-500">
-            Lihat semua chat yang telah selesai atau ditinggalkan
+            View all resolved or abandoned chats
           </p>
         </div>
 
@@ -474,10 +474,10 @@ function CsHistoryPage() {
                     Customer
                   </th>
                   <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">
-                    Mulai
+                    Started
                   </th>
                   <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">
-                    Selesai
+                    Resolved
                   </th>
                   <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">
                     Status
@@ -486,7 +486,7 @@ function CsHistoryPage() {
                     Rating
                   </th>
                   <th className="px-4 py-3 text-center text-sm font-medium text-gray-600">
-                    Pesan
+                    Messages
                   </th>
                 </tr>
               </thead>
@@ -497,7 +497,7 @@ function CsHistoryPage() {
                       colSpan={6}
                       className="px-4 py-12 text-center text-gray-500"
                     >
-                      Belum ada riwayat chat
+                      No chat history yet
                     </td>
                   </tr>
                 ) : (
@@ -525,10 +525,10 @@ function CsHistoryPage() {
                 {state.isLoading ? (
                   <span className="flex items-center gap-2">
                     <div className="w-4 h-4 border-2 border-primary-500 border-t-transparent rounded-full animate-spin" />
-                    Memuat...
+                    Loading...
                   </span>
                 ) : (
-                  "Muat lebih banyak"
+                  "Load more"
                 )}
               </button>
             </div>

@@ -31,7 +31,7 @@ function Sidebar({ csStatus, onStatusChange }: SidebarProps) {
       {/* Status Selector */}
       <div className="p-4 border-b">
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Status Anda
+          Your Status
         </label>
         <select
           value={csStatus}
@@ -91,7 +91,7 @@ function Sidebar({ csStatus, onStatusChange }: SidebarProps) {
                   d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <span>Riwayat Chat</span>
+              <span>Chat History</span>
             </a>
           </li>
         </ul>
@@ -185,24 +185,24 @@ function DashboardContent() {
         {/* Stats Row */}
         <div className="grid grid-cols-4 gap-4 mb-6">
           <StatsCard
-            label="Chat Aktif"
+            label="Active Chats"
             value={`${store.csStatus?.activeChats || 0}/${
               store.csStatus?.maxChats || 5
             }`}
             color="primary"
           />
           <StatsCard
-            label="Dalam Antrian"
+            label="In Queue"
             value={store.queue.length}
             color="orange"
           />
           <StatsCard
-            label="Chat Hari Ini"
+            label="Today's Chats"
             value={store.stats?.todayChats || 0}
             color="gray"
           />
           <StatsCard
-            label="Selesai Hari Ini"
+            label="Resolved Today"
             value={store.stats?.resolvedToday || 0}
             color="green"
           />
@@ -247,7 +247,7 @@ function DashboardContent() {
                     : "text-gray-500 hover:text-gray-700"
                 }`}
               >
-                Aktif ({store.activeChats.length})
+                Active ({store.activeChats.length})
               </button>
               <button
                 onClick={() => setActiveTab("queue")}
@@ -257,7 +257,7 @@ function DashboardContent() {
                     : "text-gray-500 hover:text-gray-700"
                 }`}
               >
-                Antrian ({store.queue.length})
+                Queue ({store.queue.length})
               </button>
             </div>
 
@@ -269,7 +269,7 @@ function DashboardContent() {
                   chats={store.activeChats}
                   selectedChatId={store.selectedChatId}
                   onSelect={store.selectChat}
-                  emptyMessage="Tidak ada chat aktif"
+                  emptyMessage="No active chats"
                 />
               ) : (
                 <ChatList
@@ -279,7 +279,7 @@ function DashboardContent() {
                   onSelect={store.selectChat}
                   onAccept={store.acceptChat}
                   isQueue={true}
-                  emptyMessage="Tidak ada chat dalam antrian"
+                  emptyMessage="No chats in queue"
                 />
               )}
             </div>
