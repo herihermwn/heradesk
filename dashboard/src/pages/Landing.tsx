@@ -1,204 +1,540 @@
-import React, { useState } from "react";
+import React from "react";
 import { createRoot } from "react-dom/client";
 import "../index.css";
+import { ChatWidget } from "../components/chat";
 
-function ChatWidget() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [started, setStarted] = useState(false);
-  const [messages, setMessages] = useState<
-    { type: "customer" | "cs" | "system"; content: string }[]
-  >([]);
-  const [input, setInput] = useState("");
+// ============================================
+// ICONS
+// ============================================
 
-  const handleStartChat = () => {
-    if (!name.trim()) return;
-    setStarted(true);
-    setMessages([
-      {
-        type: "system",
-        content: "Menghubungkan ke Customer Service...",
-      },
-    ]);
-  };
+const Icons = {
+  Chat: () => (
+    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+    </svg>
+  ),
+  Lightning: () => (
+    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+    </svg>
+  ),
+  Clock: () => (
+    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  ),
+  Shield: () => (
+    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+    </svg>
+  ),
+  Users: () => (
+    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+    </svg>
+  ),
+  ChartBar: () => (
+    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+    </svg>
+  ),
+  Cog: () => (
+    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+    </svg>
+  ),
+  Globe: () => (
+    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  ),
+  Check: () => (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+    </svg>
+  ),
+  ArrowRight: () => (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+    </svg>
+  ),
+};
 
-  const handleSendMessage = () => {
-    if (!input.trim()) return;
-    setMessages((prev) => [...prev, { type: "customer", content: input }]);
-    setInput("");
-  };
+// ============================================
+// COMPONENTS
+// ============================================
 
+function Navbar() {
   return (
-    <>
-      {/* Chat Button */}
-      {!isOpen && (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 w-14 h-14 bg-primary-600 text-white rounded-full shadow-lg hover:bg-primary-700 transition-colors flex items-center justify-center"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
-            />
-          </svg>
-        </button>
-      )}
-
-      {/* Chat Window */}
-      {isOpen && (
-        <div className="fixed bottom-6 right-6 w-96 h-[500px] bg-white rounded-lg shadow-2xl flex flex-col overflow-hidden">
-          {/* Header */}
-          <div className="bg-primary-600 text-white p-4 flex justify-between items-center">
-            <div>
-              <h3 className="font-semibold">HeraDesk Support</h3>
-              <p className="text-sm text-primary-100">
-                Kami siap membantu Anda
-              </p>
-            </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="text-white hover:text-primary-200"
-            >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
+    <nav className="bg-white/80 backdrop-blur-md fixed top-0 left-0 right-0 z-40 border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
+              <Icons.Chat />
+              <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z" />
+                <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z" />
               </svg>
-            </button>
-          </div>
-
-          {/* Content */}
-          <div className="flex-1 overflow-y-auto p-4">
-            {!started ? (
-              <div className="space-y-4">
-                <p className="text-gray-600 text-center">
-                  Halo! Silakan isi nama Anda untuk memulai chat.
-                </p>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Nama *
-                  </label>
-                  <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="input"
-                    placeholder="Nama Anda"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Email (opsional)
-                  </label>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="input"
-                    placeholder="email@example.com"
-                  />
-                </div>
-                <button onClick={handleStartChat} className="btn btn-primary w-full">
-                  Mulai Chat
-                </button>
-              </div>
-            ) : (
-              <div className="space-y-3">
-                {messages.map((msg, i) => (
-                  <div
-                    key={i}
-                    className={`flex ${
-                      msg.type === "customer" ? "justify-end" : "justify-start"
-                    }`}
-                  >
-                    <div
-                      className={`max-w-[80%] px-4 py-2 rounded-lg ${
-                        msg.type === "customer"
-                          ? "bg-primary-600 text-white"
-                          : msg.type === "system"
-                          ? "bg-gray-100 text-gray-600 text-sm italic"
-                          : "bg-gray-200 text-gray-800"
-                      }`}
-                    >
-                      {msg.content}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Input */}
-          {started && (
-            <div className="p-4 border-t">
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
-                  className="input flex-1"
-                  placeholder="Ketik pesan..."
-                />
-                <button onClick={handleSendMessage} className="btn btn-primary">
-                  Kirim
-                </button>
-              </div>
             </div>
-          )}
+            <span className="text-xl font-bold text-gray-900">HeraDesk</span>
+          </div>
+
+          <div className="hidden md:flex items-center gap-8">
+            <a href="#features" className="text-gray-600 hover:text-primary-500 transition-colors">Fitur</a>
+            <a href="#how-it-works" className="text-gray-600 hover:text-primary-500 transition-colors">Cara Kerja</a>
+            <a href="#benefits" className="text-gray-600 hover:text-primary-500 transition-colors">Keunggulan</a>
+          </div>
+
+          <a
+            href="/login"
+            className="bg-primary-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-primary-600 transition-colors"
+          >
+            Login
+          </a>
         </div>
-      )}
-    </>
+      </div>
+    </nav>
   );
 }
+
+function HeroSection() {
+  return (
+    <section className="pt-32 pb-20 bg-gradient-to-br from-primary-50 via-white to-blue-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Content */}
+          <div>
+            <div className="inline-flex items-center gap-2 bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+              Live Chat Support
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+              Tingkatkan Layanan
+              <span className="text-primary-500"> Customer Service</span> Anda
+            </h1>
+
+            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+              Platform live chat yang memudahkan tim CS Anda melayani pelanggan dengan cepat,
+              efisien, dan profesional. Kelola semua percakapan dalam satu dashboard.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 mb-8">
+              <button
+                onClick={() => {
+                  const widget = document.querySelector('[title="Buka chat"]') as HTMLButtonElement;
+                  widget?.click();
+                }}
+                className="inline-flex items-center justify-center gap-2 bg-primary-500 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-primary-600 transition-all hover:shadow-lg hover:shadow-primary-500/25"
+              >
+                Coba Gratis Sekarang
+                <Icons.ArrowRight />
+              </button>
+              <a
+                href="#how-it-works"
+                className="inline-flex items-center justify-center gap-2 bg-white text-gray-700 px-8 py-4 rounded-xl font-semibold text-lg border-2 border-gray-200 hover:border-primary-500 hover:text-primary-500 transition-all"
+              >
+                Lihat Demo
+              </a>
+            </div>
+
+            <div className="flex items-center gap-6 text-sm text-gray-500">
+              <div className="flex items-center gap-2">
+                <Icons.Check />
+                <span>Gratis untuk dicoba</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Icons.Check />
+                <span>Setup dalam 5 menit</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Content - Chat Preview */}
+          <div className="relative">
+            <div className="bg-white rounded-2xl shadow-2xl p-6 border border-gray-100">
+              {/* Chat Header */}
+              <div className="bg-primary-500 text-white rounded-xl p-4 mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="font-semibold">CS Support</p>
+                    <p className="text-sm text-white/80">Online - Siap membantu</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Chat Messages */}
+              <div className="space-y-4 mb-4">
+                <div className="flex gap-3">
+                  <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center shrink-0">
+                    <span className="text-primary-600 text-sm font-semibold">CS</span>
+                  </div>
+                  <div className="bg-gray-100 rounded-2xl rounded-tl-none px-4 py-3 max-w-[80%]">
+                    <p className="text-gray-800">Halo! Ada yang bisa saya bantu hari ini?</p>
+                  </div>
+                </div>
+
+                <div className="flex gap-3 justify-end">
+                  <div className="bg-primary-500 text-white rounded-2xl rounded-tr-none px-4 py-3 max-w-[80%]">
+                    <p>Saya ingin bertanya tentang produk Anda</p>
+                  </div>
+                </div>
+
+                <div className="flex gap-3">
+                  <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center shrink-0">
+                    <span className="text-primary-600 text-sm font-semibold">CS</span>
+                  </div>
+                  <div className="bg-gray-100 rounded-2xl rounded-tl-none px-4 py-3 max-w-[80%]">
+                    <p className="text-gray-800">Tentu! Dengan senang hati saya akan membantu. Produk apa yang ingin Anda ketahui?</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Chat Input */}
+              <div className="flex items-center gap-2 bg-gray-50 rounded-xl p-2">
+                <input
+                  type="text"
+                  placeholder="Ketik pesan..."
+                  className="flex-1 bg-transparent px-3 py-2 focus:outline-none"
+                  readOnly
+                />
+                <button className="bg-primary-500 text-white p-2 rounded-lg">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            {/* Floating Stats */}
+            <div className="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-lg p-4 border border-gray-100">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                  <Icons.Lightning />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-gray-900">{"<"}30 detik</p>
+                  <p className="text-sm text-gray-500">Rata-rata waktu respon</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="absolute -top-4 -right-4 bg-white rounded-xl shadow-lg p-4 border border-gray-100">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
+                  <Icons.Users />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-gray-900">98%</p>
+                  <p className="text-sm text-gray-500">Kepuasan pelanggan</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FeaturesSection() {
+  const features = [
+    {
+      icon: <Icons.Lightning />,
+      title: "Real-time Chat",
+      description: "Percakapan langsung dengan pelanggan secara real-time menggunakan WebSocket untuk pengalaman yang responsif."
+    },
+    {
+      icon: <Icons.Users />,
+      title: "Multi-Agent Support",
+      description: "Kelola banyak CS sekaligus dengan sistem antrian otomatis dan distribusi chat yang merata."
+    },
+    {
+      icon: <Icons.ChartBar />,
+      title: "Dashboard Analytics",
+      description: "Pantau performa tim CS dengan statistik lengkap: waktu respon, rating, jumlah chat terselesaikan."
+    },
+    {
+      icon: <Icons.Cog />,
+      title: "Canned Responses",
+      description: "Buat template jawaban untuk pertanyaan umum agar CS bisa merespon lebih cepat dan konsisten."
+    },
+    {
+      icon: <Icons.Globe />,
+      title: "Widget Terintegrasi",
+      description: "Pasang chat widget di website Anda dengan mudah. Tampilan yang responsif di semua perangkat."
+    },
+    {
+      icon: <Icons.Shield />,
+      title: "Aman & Terenkripsi",
+      description: "Data percakapan dilindungi dengan enkripsi. Kontrol akses berdasarkan role (Admin/CS)."
+    },
+  ];
+
+  return (
+    <section id="features" className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            Fitur Lengkap untuk Tim Support Anda
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Semua yang Anda butuhkan untuk memberikan layanan pelanggan terbaik dalam satu platform.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="bg-gray-50 rounded-2xl p-6 hover:bg-primary-50 hover:shadow-lg transition-all duration-300 group"
+            >
+              <div className="w-14 h-14 bg-primary-100 rounded-xl flex items-center justify-center mb-4 text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
+                {feature.icon}
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                {feature.title}
+              </h3>
+              <p className="text-gray-600">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HowItWorksSection() {
+  const steps = [
+    {
+      step: "01",
+      title: "Pelanggan Memulai Chat",
+      description: "Pelanggan mengklik widget chat di website Anda, mengisi nama, dan mulai percakapan."
+    },
+    {
+      step: "02",
+      title: "Masuk ke Antrian",
+      description: "Chat masuk ke antrian dan sistem akan memberitahu CS yang tersedia melalui notifikasi real-time."
+    },
+    {
+      step: "03",
+      title: "CS Merespon",
+      description: "CS menerima chat dan mulai membantu pelanggan. Gunakan canned response untuk respon cepat."
+    },
+    {
+      step: "04",
+      title: "Selesai & Rating",
+      description: "Setelah selesai, pelanggan bisa memberikan rating dan feedback untuk evaluasi layanan."
+    },
+  ];
+
+  return (
+    <section id="how-it-works" className="py-20 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            Cara Kerja HeraDesk
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Proses sederhana yang membuat tim CS Anda lebih produktif.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {steps.map((item, index) => (
+            <div key={index} className="relative">
+              <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 h-full">
+                <div className="text-5xl font-bold text-primary-100 mb-4">
+                  {item.step}
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600">
+                  {item.description}
+                </p>
+              </div>
+
+              {/* Arrow */}
+              {index < steps.length - 1 && (
+                <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 text-gray-300">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function BenefitsSection() {
+  const benefits = [
+    "Respon pelanggan lebih cepat dengan real-time chat",
+    "Tingkatkan kepuasan pelanggan dengan layanan profesional",
+    "Kelola banyak chat sekaligus dengan sistem antrian",
+    "Pantau performa tim dengan dashboard analytics",
+    "Hemat waktu dengan canned responses",
+    "Transfer chat antar CS dengan mudah",
+    "Riwayat chat tersimpan untuk referensi",
+    "Notifikasi real-time untuk chat baru",
+  ];
+
+  return (
+    <section id="benefits" className="py-20 bg-primary-500">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+              Mengapa Memilih HeraDesk?
+            </h2>
+            <p className="text-xl text-white/80 mb-8">
+              HeraDesk dirancang untuk membantu bisnis Anda memberikan layanan pelanggan yang lebih baik.
+            </p>
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              {benefits.map((benefit, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  <div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                    <Icons.Check />
+                  </div>
+                  <span className="text-white">{benefit}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl p-8 shadow-2xl">
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">
+              Mulai Gunakan HeraDesk
+            </h3>
+            <div className="space-y-4">
+              <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl">
+                <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 font-bold">
+                  1
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900">Daftar Akun</p>
+                  <p className="text-sm text-gray-600">Buat akun admin untuk memulai</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl">
+                <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 font-bold">
+                  2
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900">Tambah Tim CS</p>
+                  <p className="text-sm text-gray-600">Undang anggota tim support Anda</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl">
+                <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 font-bold">
+                  3
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900">Pasang Widget</p>
+                  <p className="text-sm text-gray-600">Integrasikan chat ke website Anda</p>
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={() => {
+                const widget = document.querySelector('[title="Buka chat"]') as HTMLButtonElement;
+                widget?.click();
+              }}
+              className="w-full mt-6 bg-primary-500 text-white py-4 rounded-xl font-semibold text-lg hover:bg-primary-600 transition-colors"
+            >
+              Coba Chat Sekarang
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="bg-gray-900 text-white py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid md:grid-cols-4 gap-8 mb-8">
+          <div className="md:col-span-2">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
+                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z" />
+                  <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z" />
+                </svg>
+              </div>
+              <span className="text-xl font-bold">HeraDesk</span>
+            </div>
+            <p className="text-gray-400 max-w-md">
+              Platform live chat untuk customer service yang membantu bisnis Anda memberikan layanan pelanggan terbaik.
+            </p>
+          </div>
+
+          <div>
+            <h4 className="font-semibold mb-4">Produk</h4>
+            <ul className="space-y-2 text-gray-400">
+              <li><a href="#features" className="hover:text-white transition-colors">Fitur</a></li>
+              <li><a href="#how-it-works" className="hover:text-white transition-colors">Cara Kerja</a></li>
+              <li><a href="#benefits" className="hover:text-white transition-colors">Keunggulan</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-semibold mb-4">Akses</h4>
+            <ul className="space-y-2 text-gray-400">
+              <li><a href="/login" className="hover:text-white transition-colors">Login</a></li>
+              <li><a href="/cs" className="hover:text-white transition-colors">Dashboard CS</a></li>
+              <li><a href="/admin" className="hover:text-white transition-colors">Dashboard Admin</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
+          <p>&copy; {new Date().getFullYear()} HeraDesk. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+// ============================================
+// MAIN LANDING PAGE
+// ============================================
 
 function Landing() {
   return (
     <div className="min-h-screen">
-      {/* Navigation */}
-      <nav className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-primary-600">HeraDesk</h1>
-          <a
-            href="/login"
-            className="text-gray-600 hover:text-primary-600 transition-colors"
-          >
-            Login CS/Admin
-          </a>
-        </div>
-      </nav>
-
-      {/* Hero */}
-      <main className="max-w-7xl mx-auto px-4 py-16">
-        <div className="text-center">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Customer Service Chat
-          </h2>
-          <p className="text-xl text-gray-600 mb-8">
-            Hubungi kami untuk bantuan dan pertanyaan Anda
-          </p>
-        </div>
-      </main>
+      <Navbar />
+      <HeroSection />
+      <FeaturesSection />
+      <HowItWorksSection />
+      <BenefitsSection />
+      <Footer />
 
       {/* Chat Widget */}
-      <ChatWidget />
+      <ChatWidget
+        title="HeraDesk Support"
+        subtitle="Kami siap membantu Anda"
+        placeholder="Ketik pesan..."
+      />
     </div>
   );
 }
