@@ -84,7 +84,12 @@ function Navbar() {
           <div className="hidden md:flex items-center gap-8">
             <a href="#features" className="text-gray-600 hover:text-primary-500 transition-colors">Fitur</a>
             <a href="#how-it-works" className="text-gray-600 hover:text-primary-500 transition-colors">Cara Kerja</a>
-            <a href="#benefits" className="text-gray-600 hover:text-primary-500 transition-colors">Keunggulan</a>
+            <a href="https://github.com/herihermwn/heradesk" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-primary-500 transition-colors flex items-center gap-1">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+              </svg>
+              GitHub
+            </a>
           </div>
 
           <a
@@ -107,18 +112,20 @@ function HeroSection() {
           {/* Left Content */}
           <div>
             <div className="inline-flex items-center gap-2 bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-              Live Chat Support
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+              </svg>
+              Open Source Project
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-              Tingkatkan Layanan
-              <span className="text-primary-500"> Customer Service</span> Anda
+              Sistem
+              <span className="text-primary-500"> Customer Service</span> Open Source
             </h1>
 
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              Platform live chat yang memudahkan tim CS Anda melayani pelanggan dengan cepat,
-              efisien, dan profesional. Kelola semua percakapan dalam satu dashboard.
+              Platform live chat open source untuk tim customer service Anda.
+              Gratis digunakan, mudah dikustomisasi, dan siap diintegrasikan ke website Anda.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -129,21 +136,26 @@ function HeroSection() {
                 }}
                 className="inline-flex items-center justify-center gap-2 bg-primary-500 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-primary-600 transition-all hover:shadow-lg hover:shadow-primary-500/25"
               >
-                Coba Gratis Sekarang
+                Coba Chat Sekarang
                 <Icons.ArrowRight />
               </button>
               <a
-                href="#how-it-works"
+                href="https://github.com/herihermwn/heradesk"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-white text-gray-700 px-8 py-4 rounded-xl font-semibold text-lg border-2 border-gray-200 hover:border-primary-500 hover:text-primary-500 transition-all"
               >
-                Lihat Demo
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+                </svg>
+                Lihat Source Code
               </a>
             </div>
 
             <div className="flex items-center gap-6 text-sm text-gray-500">
               <div className="flex items-center gap-2">
                 <Icons.Check />
-                <span>Gratis untuk dicoba</span>
+                <span>100% Open Source</span>
               </div>
               <div className="flex items-center gap-2">
                 <Icons.Check />
@@ -483,9 +495,20 @@ function Footer() {
               </div>
               <span className="text-xl font-bold">HeraDesk</span>
             </div>
-            <p className="text-gray-400 max-w-md">
-              Platform live chat untuk customer service yang membantu bisnis Anda memberikan layanan pelanggan terbaik.
+            <p className="text-gray-400 max-w-md mb-4">
+              Platform live chat open source untuk customer service. Gratis digunakan dan dikembangkan bersama komunitas.
             </p>
+            <a
+              href="https://github.com/herihermwn/heradesk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+            >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+              </svg>
+              github.com/herihermwn/heradesk
+            </a>
           </div>
 
           <div>
@@ -493,7 +516,7 @@ function Footer() {
             <ul className="space-y-2 text-gray-400">
               <li><a href="#features" className="hover:text-white transition-colors">Fitur</a></li>
               <li><a href="#how-it-works" className="hover:text-white transition-colors">Cara Kerja</a></li>
-              <li><a href="#benefits" className="hover:text-white transition-colors">Keunggulan</a></li>
+              <li><a href="https://github.com/herihermwn/heradesk" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Source Code</a></li>
             </ul>
           </div>
 
@@ -508,7 +531,7 @@ function Footer() {
         </div>
 
         <div className="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
-          <p>&copy; {new Date().getFullYear()} HeraDesk. All rights reserved.</p>
+          <p>HeraDesk is open source software released under MIT License.</p>
         </div>
       </div>
     </footer>
