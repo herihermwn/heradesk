@@ -133,10 +133,10 @@ export function ConfirmModal({
   isOpen,
   onClose,
   onConfirm,
-  title = "Konfirmasi",
+  title = "Confirmation",
   message,
-  confirmText = "Ya",
-  cancelText = "Batal",
+  confirmText = "Yes",
+  cancelText = "Cancel",
   variant = "primary",
   isLoading = false,
 }: ConfirmModalProps) {
