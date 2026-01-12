@@ -66,6 +66,13 @@ export async function handleCsSetStatus(
     // Update status
     const csStatus = await updateCsStatus(userId, status as CsState);
 
+    if (!csStatus) {
+      ws.send(
+        JSON.stringify(createErrorMessage("UPDATE_FAILED", "Failed to update status"))
+      );
+      return;
+    }
+
     // Get CS name for notification
     const user = await prisma.user.findUnique({
       where: { id: userId },

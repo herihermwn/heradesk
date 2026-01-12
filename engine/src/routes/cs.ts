@@ -114,6 +114,13 @@ export async function handleUpdateCsStatus(req: Request): Promise<Response> {
 
     const csStatus = await updateCsStatus(user.userId, status as CsState);
 
+    if (!csStatus) {
+      return Response.json(
+        { success: false, message: "Failed to update status" },
+        { status: 500 }
+      );
+    }
+
     // Notify about status change
     notifyCsStatusChanged(user.userId, user.username, status);
 
