@@ -81,8 +81,8 @@ function Navbar() {
           </div>
 
           <div className="hidden md:flex items-center gap-8">
-            <a href="#features" className="text-gray-600 hover:text-primary-500 transition-colors">Fitur</a>
-            <a href="#how-it-works" className="text-gray-600 hover:text-primary-500 transition-colors">Cara Kerja</a>
+            <a href="#features" className="text-gray-600 hover:text-primary-500 transition-colors">Features</a>
+            <a href="#how-it-works" className="text-gray-600 hover:text-primary-500 transition-colors">How It Works</a>
             <a href="https://github.com/herihermwn/heradesk" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-primary-500 transition-colors flex items-center gap-1">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
@@ -118,24 +118,24 @@ function HeroSection() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-              Sistem
-              <span className="text-primary-500"> Customer Service</span> Open Source
+              Open Source
+              <span className="text-primary-500"> Customer Service</span> System
             </h1>
 
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              Platform live chat open source untuk tim customer service Anda.
-              Gratis digunakan, mudah dikustomisasi, dan siap diintegrasikan ke website Anda.
+              Open source live chat platform for your customer service team.
+              Free to use, easy to customize, and ready to integrate into your website.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <button
                 onClick={() => {
-                  const widget = document.querySelector('[title="Buka chat"]') as HTMLButtonElement;
+                  const widget = document.querySelector('[title="Open chat"]') as HTMLButtonElement;
                   widget?.click();
                 }}
                 className="inline-flex items-center justify-center gap-2 bg-primary-500 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-primary-600 transition-all hover:shadow-lg hover:shadow-primary-500/25"
               >
-                Coba Chat Sekarang
+                Try Chat Now
                 <Icons.ArrowRight />
               </button>
               <a
@@ -147,7 +147,7 @@ function HeroSection() {
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                   <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
                 </svg>
-                Lihat Source Code
+                View Source Code
               </a>
             </div>
 
@@ -158,7 +158,7 @@ function HeroSection() {
               </div>
               <div className="flex items-center gap-2">
                 <Icons.Check />
-                <span>Setup dalam 5 menit</span>
+                <span>Setup in 5 minutes</span>
               </div>
             </div>
           </div>
@@ -176,7 +176,7 @@ function HeroSection() {
                   </div>
                   <div>
                     <p className="font-semibold">CS Support</p>
-                    <p className="text-sm text-white/80">Online - Siap membantu</p>
+                    <p className="text-sm text-white/80">Online - Ready to help</p>
                   </div>
                 </div>
               </div>
@@ -188,13 +188,13 @@ function HeroSection() {
                     <span className="text-primary-600 text-sm font-semibold">CS</span>
                   </div>
                   <div className="bg-gray-100 rounded-2xl rounded-tl-none px-4 py-3 max-w-[80%]">
-                    <p className="text-gray-800">Halo! Ada yang bisa saya bantu hari ini?</p>
+                    <p className="text-gray-800">Hello! How can I help you today?</p>
                   </div>
                 </div>
 
                 <div className="flex gap-3 justify-end">
                   <div className="bg-primary-500 text-white rounded-2xl rounded-tr-none px-4 py-3 max-w-[80%]">
-                    <p>Saya ingin bertanya tentang produk Anda</p>
+                    <p>I have a question about your product</p>
                   </div>
                 </div>
 
@@ -203,7 +203,7 @@ function HeroSection() {
                     <span className="text-primary-600 text-sm font-semibold">CS</span>
                   </div>
                   <div className="bg-gray-100 rounded-2xl rounded-tl-none px-4 py-3 max-w-[80%]">
-                    <p className="text-gray-800">Tentu! Dengan senang hati saya akan membantu. Produk apa yang ingin Anda ketahui?</p>
+                    <p className="text-gray-800">Of course! I'd be happy to help. Which product would you like to know about?</p>
                   </div>
                 </div>
               </div>
@@ -212,7 +212,7 @@ function HeroSection() {
               <div className="flex items-center gap-2 bg-gray-50 rounded-xl p-2">
                 <input
                   type="text"
-                  placeholder="Ketik pesan..."
+                  placeholder="Type a message..."
                   className="flex-1 bg-transparent px-3 py-2 focus:outline-none"
                   readOnly
                 />
@@ -231,8 +231,8 @@ function HeroSection() {
                   <Icons.Lightning />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900">{"<"}30 detik</p>
-                  <p className="text-sm text-gray-500">Rata-rata waktu respon</p>
+                  <p className="text-2xl font-bold text-gray-900">{"<"}30 sec</p>
+                  <p className="text-sm text-gray-500">Avg. response time</p>
                 </div>
               </div>
             </div>
@@ -244,7 +244,7 @@ function HeroSection() {
                 </div>
                 <div>
                   <p className="text-2xl font-bold text-gray-900">98%</p>
-                  <p className="text-sm text-gray-500">Kepuasan pelanggan</p>
+                  <p className="text-sm text-gray-500">Customer satisfaction</p>
                 </div>
               </div>
             </div>
@@ -260,32 +260,32 @@ function FeaturesSection() {
     {
       icon: <Icons.Lightning />,
       title: "Real-time Chat",
-      description: "Percakapan langsung dengan pelanggan secara real-time menggunakan WebSocket untuk pengalaman yang responsif."
+      description: "Real-time conversations with customers using WebSocket for a responsive experience."
     },
     {
       icon: <Icons.Users />,
       title: "Multi-Agent Support",
-      description: "Kelola banyak CS sekaligus dengan sistem antrian otomatis dan distribusi chat yang merata."
+      description: "Manage multiple CS agents with automatic queue system and even chat distribution."
     },
     {
       icon: <Icons.ChartBar />,
       title: "Dashboard Analytics",
-      description: "Pantau performa tim CS dengan statistik lengkap: waktu respon, rating, jumlah chat terselesaikan."
+      description: "Monitor team performance with complete statistics: response time, ratings, resolved chats."
     },
     {
       icon: <Icons.Cog />,
       title: "Canned Responses",
-      description: "Buat template jawaban untuk pertanyaan umum agar CS bisa merespon lebih cepat dan konsisten."
+      description: "Create answer templates for common questions so CS can respond faster and consistently."
     },
     {
       icon: <Icons.Globe />,
-      title: "Widget Terintegrasi",
-      description: "Pasang chat widget di website Anda dengan mudah. Tampilan yang responsif di semua perangkat."
+      title: "Integrated Widget",
+      description: "Easily embed the chat widget on your website. Responsive design for all devices."
     },
     {
       icon: <Icons.Shield />,
-      title: "Aman & Terenkripsi",
-      description: "Data percakapan dilindungi dengan enkripsi. Kontrol akses berdasarkan role (Admin/CS)."
+      title: "Secure & Encrypted",
+      description: "Conversation data is protected with encryption. Role-based access control (Admin/CS)."
     },
   ];
 
@@ -294,10 +294,10 @@ function FeaturesSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Fitur Lengkap untuk Tim Support Anda
+            Complete Features for Your Support Team
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Semua yang Anda butuhkan untuk memberikan layanan pelanggan terbaik dalam satu platform.
+            Everything you need to provide the best customer service in one platform.
           </p>
         </div>
 
@@ -328,23 +328,23 @@ function HowItWorksSection() {
   const steps = [
     {
       step: "01",
-      title: "Pelanggan Memulai Chat",
-      description: "Pelanggan mengklik widget chat di website Anda, mengisi nama, dan mulai percakapan."
+      title: "Customer Starts Chat",
+      description: "Customer clicks the chat widget on your website, enters their name, and starts a conversation."
     },
     {
       step: "02",
-      title: "Masuk ke Antrian",
-      description: "Chat masuk ke antrian dan sistem akan memberitahu CS yang tersedia melalui notifikasi real-time."
+      title: "Enters Queue",
+      description: "Chat enters the queue and the system notifies available CS agents through real-time notifications."
     },
     {
       step: "03",
-      title: "CS Merespon",
-      description: "CS menerima chat dan mulai membantu pelanggan. Gunakan canned response untuk respon cepat."
+      title: "CS Responds",
+      description: "CS accepts the chat and starts helping the customer. Use canned responses for quick replies."
     },
     {
       step: "04",
-      title: "Selesai & Rating",
-      description: "Setelah selesai, pelanggan bisa memberikan rating dan feedback untuk evaluasi layanan."
+      title: "Complete & Rating",
+      description: "After completion, customers can give ratings and feedback for service evaluation."
     },
   ];
 
@@ -353,10 +353,10 @@ function HowItWorksSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Cara Kerja HeraDesk
+            How HeraDesk Works
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Proses sederhana yang membuat tim CS Anda lebih produktif.
+            A simple process that makes your CS team more productive.
           </p>
         </div>
 
@@ -393,14 +393,14 @@ function HowItWorksSection() {
 
 function BenefitsSection() {
   const benefits = [
-    "Respon pelanggan lebih cepat dengan real-time chat",
-    "Tingkatkan kepuasan pelanggan dengan layanan profesional",
-    "Kelola banyak chat sekaligus dengan sistem antrian",
-    "Pantau performa tim dengan dashboard analytics",
-    "Hemat waktu dengan canned responses",
-    "Transfer chat antar CS dengan mudah",
-    "Riwayat chat tersimpan untuk referensi",
-    "Notifikasi real-time untuk chat baru",
+    "Respond to customers faster with real-time chat",
+    "Increase customer satisfaction with professional service",
+    "Handle multiple chats with queue system",
+    "Monitor team performance with dashboard analytics",
+    "Save time with canned responses",
+    "Transfer chats between CS easily",
+    "Chat history stored for reference",
+    "Real-time notifications for new chats",
   ];
 
   return (
@@ -409,10 +409,10 @@ function BenefitsSection() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-              Mengapa Memilih HeraDesk?
+              Why Choose HeraDesk?
             </h2>
             <p className="text-xl text-white/80 mb-8">
-              HeraDesk dirancang untuk membantu bisnis Anda memberikan layanan pelanggan yang lebih baik.
+              HeraDesk is designed to help businesses provide better customer service - completely open source.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-4">
@@ -429,7 +429,7 @@ function BenefitsSection() {
 
           <div className="bg-white rounded-2xl p-8 shadow-2xl">
             <h3 className="text-2xl font-bold text-gray-900 mb-6">
-              Mulai Gunakan HeraDesk
+              Get Started with HeraDesk
             </h3>
             <div className="space-y-4">
               <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl">
@@ -437,8 +437,8 @@ function BenefitsSection() {
                   1
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900">Daftar Akun</p>
-                  <p className="text-sm text-gray-600">Buat akun admin untuk memulai</p>
+                  <p className="font-semibold text-gray-900">Clone Repository</p>
+                  <p className="text-sm text-gray-600">Get the source code from GitHub</p>
                 </div>
               </div>
 
@@ -447,8 +447,8 @@ function BenefitsSection() {
                   2
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900">Tambah Tim CS</p>
-                  <p className="text-sm text-gray-600">Undang anggota tim support Anda</p>
+                  <p className="font-semibold text-gray-900">Install Dependencies</p>
+                  <p className="text-sm text-gray-600">Run bun install to setup the project</p>
                 </div>
               </div>
 
@@ -457,21 +457,23 @@ function BenefitsSection() {
                   3
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900">Pasang Widget</p>
-                  <p className="text-sm text-gray-600">Integrasikan chat ke website Anda</p>
+                  <p className="font-semibold text-gray-900">Start Building</p>
+                  <p className="text-sm text-gray-600">Customize and deploy to your server</p>
                 </div>
               </div>
             </div>
 
-            <button
-              onClick={() => {
-                const widget = document.querySelector('[title="Buka chat"]') as HTMLButtonElement;
-                widget?.click();
-              }}
-              className="w-full mt-6 bg-primary-500 text-white py-4 rounded-xl font-semibold text-lg hover:bg-primary-600 transition-colors"
+            <a
+              href="https://github.com/herihermwn/heradesk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full mt-6 bg-primary-500 text-white py-4 rounded-xl font-semibold text-lg hover:bg-primary-600 transition-colors flex items-center justify-center gap-2"
             >
-              Coba Chat Sekarang
-            </button>
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+              </svg>
+              View on GitHub
+            </a>
           </div>
         </div>
       </div>
@@ -495,7 +497,7 @@ function Footer() {
               <span className="text-xl font-bold">HeraDesk</span>
             </div>
             <p className="text-gray-400 max-w-md mb-4">
-              Platform live chat open source untuk customer service. Gratis digunakan dan dikembangkan bersama komunitas.
+              Open source live chat platform for customer service. Free to use and developed with the community.
             </p>
             <a
               href="https://github.com/herihermwn/heradesk"
@@ -511,20 +513,20 @@ function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Produk</h4>
+            <h4 className="font-semibold mb-4">Product</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="#features" className="hover:text-white transition-colors">Fitur</a></li>
-              <li><a href="#how-it-works" className="hover:text-white transition-colors">Cara Kerja</a></li>
+              <li><a href="#features" className="hover:text-white transition-colors">Features</a></li>
+              <li><a href="#how-it-works" className="hover:text-white transition-colors">How It Works</a></li>
               <li><a href="https://github.com/herihermwn/heradesk" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Source Code</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Akses</h4>
+            <h4 className="font-semibold mb-4">Access</h4>
             <ul className="space-y-2 text-gray-400">
               <li><a href="/login" className="hover:text-white transition-colors">Login</a></li>
-              <li><a href="/cs" className="hover:text-white transition-colors">Dashboard CS</a></li>
-              <li><a href="/admin" className="hover:text-white transition-colors">Dashboard Admin</a></li>
+              <li><a href="/cs" className="hover:text-white transition-colors">CS Dashboard</a></li>
+              <li><a href="/admin" className="hover:text-white transition-colors">Admin Dashboard</a></li>
             </ul>
           </div>
         </div>
@@ -554,8 +556,8 @@ function Landing() {
       {/* Chat Widget */}
       <ChatWidget
         title="HeraDesk Support"
-        subtitle="Kami siap membantu Anda"
-        placeholder="Ketik pesan..."
+        subtitle="We're here to help"
+        placeholder="Type a message..."
       />
     </div>
   );

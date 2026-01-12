@@ -147,7 +147,7 @@ export function MessageInput({
               onClick={handleAttachClick}
               disabled={disabled}
               className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              title="Lampirkan file"
+              title="Attach file"
             >
               <svg
                 className="w-5 h-5"
@@ -205,7 +205,7 @@ export function MessageInput({
           onClick={handleSend}
           disabled={disabled || !message.trim()}
           className="p-2 bg-primary text-white rounded-full hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          title="Kirim pesan"
+          title="Send message"
         >
           <svg
             className="w-5 h-5"
@@ -279,7 +279,7 @@ export function CannedResponseSelector({
       <div className="overflow-y-auto max-h-48">
         {filteredResponses.length === 0 ? (
           <div className="p-4 text-center text-gray-500 text-sm">
-            Tidak ada balasan cepat
+            No quick replies available
           </div>
         ) : (
           filteredResponses.map((response) => (

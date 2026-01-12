@@ -34,9 +34,9 @@ const STORAGE_KEYS = {
 export function ChatWidget({
   position = "bottom-right",
   primaryColor,
-  title = "Chat dengan Kami",
-  subtitle = "Kami siap membantu Anda",
-  placeholder = "Ketik pesan...",
+  title = "Chat with Us",
+  subtitle = "We're here to help",
+  placeholder = "Type a message...",
 }: ChatWidgetProps) {
   // State
   const [state, setState] = useState<ChatWidgetState>({
@@ -105,7 +105,7 @@ export function ChatWidget({
         assignedCs: data.cs,
         queuePosition: null,
       }));
-      addSystemMessage(`Anda terhubung dengan ${data.cs.name}`);
+      addSystemMessage(`You are now connected with ${data.cs.name}`);
     });
 
     // New message (skip customer messages as they're added optimistically)
@@ -128,7 +128,7 @@ export function ChatWidget({
 
     // Chat ended
     const unsubEnded = ws.on(WS_EVENTS.SERVER.CHAT_ENDED, (data: any) => {
-      addSystemMessage("Chat telah berakhir. Terima kasih!");
+      addSystemMessage("Chat has ended. Thank you!");
       setState((prev) => ({
         ...prev,
         hasStarted: false,
@@ -276,11 +276,11 @@ export function ChatWidget({
               <h3 className="font-semibold">{title}</h3>
               <p className="text-sm text-white/80">
                 {state.assignedCs
-                  ? `Terhubung dengan ${state.assignedCs.name}`
+                  ? `Connected with ${state.assignedCs.name}`
                   : state.hasStarted
                   ? state.queuePosition
-                    ? `Posisi antrian: ${state.queuePosition}`
-                    : "Menunggu agen..."
+                    ? `Queue position: ${state.queuePosition}`
+                    : "Waiting for agent..."
                   : subtitle}
               </p>
             </div>
@@ -290,7 +290,7 @@ export function ChatWidget({
                 className={`w-2 h-2 rounded-full ${
                   ws.isConnected ? "bg-green-400" : "bg-red-400"
                 }`}
-                title={ws.isConnected ? "Terhubung" : "Terputus"}
+                title={ws.isConnected ? "Connected" : "Disconnected"}
               />
               {/* Close button */}
               <button
@@ -322,7 +322,7 @@ export function ChatWidget({
                 <form onSubmit={handleStartChat} className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Nama
+                      Name
                     </label>
                     <input
                       type="text"
@@ -333,13 +333,13 @@ export function ChatWidget({
                           customerName: e.target.value,
                         }))
                       }
-                      placeholder="Nama Anda"
+                      placeholder="Your name"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Email (opsional)
+                      Email (optional)
                     </label>
                     <input
                       type="email"
@@ -350,7 +350,7 @@ export function ChatWidget({
                           customerEmail: e.target.value,
                         }))
                       }
-                      placeholder="email@contoh.com"
+                      placeholder="email@example.com"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     />
                   </div>
@@ -366,7 +366,7 @@ export function ChatWidget({
                     disabled={isLoading}
                     className="w-full bg-primary-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-primary-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isLoading ? "Memulai..." : "Mulai Chat"}
+                    {isLoading ? "Starting..." : "Start Chat"}
                   </button>
                 </form>
               </div>
@@ -408,7 +408,7 @@ export function ChatWidget({
                 onClick={handleEndChat}
                 className="text-xs text-gray-500 hover:text-red-500 transition-colors"
               >
-                Akhiri Chat
+                End Chat
               </button>
             </div>
           )}
@@ -419,7 +419,7 @@ export function ChatWidget({
       <button
         onClick={toggleWidget}
         className={`fixed bottom-4 sm:bottom-6 ${positionClasses} w-14 h-14 bg-primary-500 hover:bg-primary-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center z-50 hover:scale-105`}
-        title={state.isOpen ? "Tutup chat" : "Buka chat"}
+        title={state.isOpen ? "Close chat" : "Open chat"}
       >
         {state.isOpen ? (
           <svg
