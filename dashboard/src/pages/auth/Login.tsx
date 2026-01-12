@@ -45,7 +45,7 @@ function Login() {
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-primary-600">HeraDesk</h1>
-          <p className="text-gray-600 mt-2">Login untuk melanjutkan</p>
+          <p className="text-gray-600 mt-2">Login to continue</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -94,7 +94,7 @@ function Login() {
 
         <div className="mt-6 text-center">
           <a href="/" className="text-primary-600 hover:underline text-sm">
-            Kembali ke halaman utama
+            Back to homepage
           </a>
         </div>
       </div>
