@@ -52,7 +52,7 @@ async function main() {
   const responses = [
     {
       title: "Greeting",
-      content: "Halo! Selamat datang di HeraDesk. Ada yang bisa saya bantu?",
+      content: "Hello! Welcome to HeraDesk. How can I help you?",
       shortcut: "/greeting",
       category: "General",
       isGlobal: true,
@@ -60,7 +60,7 @@ async function main() {
     {
       title: "Thank You",
       content:
-        "Terima kasih telah menghubungi kami. Apakah ada hal lain yang bisa saya bantu?",
+        "Thank you for contacting us. Is there anything else I can help you with?",
       shortcut: "/thanks",
       category: "General",
       isGlobal: true,
@@ -68,7 +68,7 @@ async function main() {
     {
       title: "Wait",
       content:
-        "Mohon tunggu sebentar, saya sedang memeriksa informasi untuk Anda.",
+        "Please wait a moment, I'm checking the information for you.",
       shortcut: "/wait",
       category: "General",
       isGlobal: true,

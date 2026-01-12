@@ -65,7 +65,7 @@ export async function handleGetCsStatus(req: Request): Promise<Response> {
 
     if (!status) {
       return Response.json(
-        { success: false, message: "Status tidak ditemukan" },
+        { success: false, message: "Status not found" },
         { status: 404 }
       );
     }
@@ -82,7 +82,7 @@ export async function handleGetCsStatus(req: Request): Promise<Response> {
   } catch (error) {
     console.error("[CS] Get status error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -107,7 +107,7 @@ export async function handleUpdateCsStatus(req: Request): Promise<Response> {
 
     if (!status || !["online", "offline", "busy"].includes(status)) {
       return Response.json(
-        { success: false, message: "Status tidak valid" },
+        { success: false, message: "Invalid status" },
         { status: 400 }
       );
     }
@@ -124,7 +124,7 @@ export async function handleUpdateCsStatus(req: Request): Promise<Response> {
 
     return Response.json({
       success: true,
-      message: "Status berhasil diperbarui",
+      message: "Status updated successfully",
       data: {
         state: csStatus.status,
         maxChats: csStatus.maxChats,
@@ -134,7 +134,7 @@ export async function handleUpdateCsStatus(req: Request): Promise<Response> {
   } catch (error) {
     console.error("[CS] Update status error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -181,7 +181,7 @@ export async function handleGetCsChats(req: Request): Promise<Response> {
   } catch (error) {
     console.error("[CS] Get chats error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -207,7 +207,7 @@ export async function handleGetChatDetail(req: Request): Promise<Response> {
 
     if (!chatId) {
       return Response.json(
-        { success: false, message: "Chat ID tidak valid" },
+        { success: false, message: "Invalid chat ID" },
         { status: 400 }
       );
     }
@@ -216,7 +216,7 @@ export async function handleGetChatDetail(req: Request): Promise<Response> {
 
     if (!session) {
       return Response.json(
-        { success: false, message: "Chat tidak ditemukan" },
+        { success: false, message: "Chat not found" },
         { status: 404 }
       );
     }
@@ -224,7 +224,7 @@ export async function handleGetChatDetail(req: Request): Promise<Response> {
     // Check if CS is assigned to this chat or if it's in queue (waiting)
     if (session.assignedCsId !== user.userId && session.status !== "waiting") {
       return Response.json(
-        { success: false, message: "Anda tidak memiliki akses ke chat ini" },
+        { success: false, message: "You don't have access to this chat" },
         { status: 403 }
       );
     }
@@ -252,7 +252,7 @@ export async function handleGetChatDetail(req: Request): Promise<Response> {
   } catch (error) {
     console.error("[CS] Get chat detail error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -299,7 +299,7 @@ export async function handleGetCsHistory(req: Request): Promise<Response> {
   } catch (error) {
     console.error("[CS] Get history error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -336,7 +336,7 @@ export async function handleGetCsQueue(req: Request): Promise<Response> {
   } catch (error) {
     console.error("[CS] Get queue error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -362,7 +362,7 @@ export async function handleAcceptChat(req: Request): Promise<Response> {
 
     if (!chatId) {
       return Response.json(
-        { success: false, message: "Chat ID tidak valid" },
+        { success: false, message: "Invalid chat ID" },
         { status: 400 }
       );
     }
@@ -377,7 +377,7 @@ export async function handleAcceptChat(req: Request): Promise<Response> {
       return Response.json(
         {
           success: false,
-          message: "Anda tidak dapat menerima chat saat ini",
+          message: "You cannot accept chats at this time",
         },
         { status: 400 }
       );
@@ -387,7 +387,7 @@ export async function handleAcceptChat(req: Request): Promise<Response> {
     const session = await getSessionById(chatId);
     if (!session || session.status !== "waiting") {
       return Response.json(
-        { success: false, message: "Chat tidak tersedia" },
+        { success: false, message: "Chat not available" },
         { status: 400 }
       );
     }
@@ -411,7 +411,7 @@ export async function handleAcceptChat(req: Request): Promise<Response> {
 
     return Response.json({
       success: true,
-      message: "Chat berhasil diterima",
+      message: "Chat accepted successfully",
       chat: {
         id: assigned.id,
         customerName: assigned.customerName,
@@ -422,7 +422,7 @@ export async function handleAcceptChat(req: Request): Promise<Response> {
   } catch (error) {
     console.error("[CS] Accept chat error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -448,7 +448,7 @@ export async function handleResolveChat(req: Request): Promise<Response> {
 
     if (!chatId) {
       return Response.json(
-        { success: false, message: "Chat ID tidak valid" },
+        { success: false, message: "Invalid chat ID" },
         { status: 400 }
       );
     }
@@ -459,7 +459,7 @@ export async function handleResolveChat(req: Request): Promise<Response> {
       return Response.json(
         {
           success: false,
-          message: "Chat tidak ditemukan atau bukan milik Anda",
+          message: "Chat not found or not assigned to you",
         },
         { status: 400 }
       );
@@ -470,12 +470,12 @@ export async function handleResolveChat(req: Request): Promise<Response> {
 
     return Response.json({
       success: true,
-      message: "Chat berhasil diselesaikan",
+      message: "Chat resolved successfully",
     });
   } catch (error) {
     console.error("[CS] Resolve chat error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -504,7 +504,7 @@ export async function handleTransferChat(req: Request): Promise<Response> {
 
     if (!chatId || !toCsId) {
       return Response.json(
-        { success: false, message: "Data tidak lengkap" },
+        { success: false, message: "Incomplete data" },
         { status: 400 }
       );
     }
@@ -517,7 +517,7 @@ export async function handleTransferChat(req: Request): Promise<Response> {
       targetCs.currentChats >= targetCs.maxChats
     ) {
       return Response.json(
-        { success: false, message: "CS tujuan tidak tersedia" },
+        { success: false, message: "Target CS not available" },
         { status: 400 }
       );
     }
@@ -528,7 +528,7 @@ export async function handleTransferChat(req: Request): Promise<Response> {
       return Response.json(
         {
           success: false,
-          message: "Chat tidak ditemukan atau bukan milik Anda",
+          message: "Chat not found or not assigned to you",
         },
         { status: 400 }
       );
@@ -550,12 +550,12 @@ export async function handleTransferChat(req: Request): Promise<Response> {
 
     return Response.json({
       success: true,
-      message: "Chat berhasil ditransfer",
+      message: "Chat transferred successfully",
     });
   } catch (error) {
     console.error("[CS] Transfer chat error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -598,7 +598,7 @@ export async function handleGetOnlineCS(req: Request): Promise<Response> {
   } catch (error) {
     console.error("[CS] Get online CS error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -627,7 +627,7 @@ export async function handleGetCsStats(req: Request): Promise<Response> {
   } catch (error) {
     console.error("[CS] Get stats error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -673,7 +673,7 @@ export async function handleGetCannedResponses(req: Request): Promise<Response> 
   } catch (error) {
     console.error("[CS] Get canned responses error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -698,7 +698,7 @@ export async function handleCreateCannedResponse(req: Request): Promise<Response
 
     if (!title || !content) {
       return Response.json(
-        { success: false, message: "Title dan content wajib diisi" },
+        { success: false, message: "Title and content are required" },
         { status: 400 }
       );
     }
@@ -716,7 +716,7 @@ export async function handleCreateCannedResponse(req: Request): Promise<Response
 
     return Response.json({
       success: true,
-      message: "Canned response berhasil dibuat",
+      message: "Canned response created successfully",
       response: {
         id: response.id,
         title: response.title,
@@ -728,7 +728,7 @@ export async function handleCreateCannedResponse(req: Request): Promise<Response
   } catch (error) {
     console.error("[CS] Create canned response error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -754,7 +754,7 @@ export async function handleDeleteCannedResponse(req: Request): Promise<Response
 
     if (!responseId) {
       return Response.json(
-        { success: false, message: "ID tidak valid" },
+        { success: false, message: "Invalid ID" },
         { status: 400 }
       );
     }
@@ -766,7 +766,7 @@ export async function handleDeleteCannedResponse(req: Request): Promise<Response
 
     if (!response || response.createdBy !== user.userId) {
       return Response.json(
-        { success: false, message: "Response tidak ditemukan" },
+        { success: false, message: "Response not found" },
         { status: 404 }
       );
     }
@@ -777,12 +777,12 @@ export async function handleDeleteCannedResponse(req: Request): Promise<Response
 
     return Response.json({
       success: true,
-      message: "Canned response berhasil dihapus",
+      message: "Canned response deleted successfully",
     });
   } catch (error) {
     console.error("[CS] Delete canned response error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }

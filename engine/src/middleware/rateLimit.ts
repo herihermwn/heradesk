@@ -31,7 +31,7 @@ export interface RateLimitOptions {
 const DEFAULT_OPTIONS: RateLimitOptions = {
   windowMs: 60 * 1000,  // 1 minute
   maxRequests: 60,      // 60 requests per minute
-  message: "Terlalu banyak request. Silakan coba lagi nanti.",
+  message: "Too many requests. Please try again later.",
 };
 
 /**
@@ -121,7 +121,7 @@ export const loginRateLimit = rateLimit({
   windowMs: 60 * 1000,
   maxRequests: 5,
   keyPrefix: "login",
-  message: "Terlalu banyak percobaan login. Silakan coba lagi dalam 1 menit.",
+  message: "Too many login attempts. Please try again in 1 minute.",
 });
 
 // Moderate rate limit for API endpoints (100 per minute)
@@ -129,7 +129,7 @@ export const apiRateLimit = rateLimit({
   windowMs: 60 * 1000,
   maxRequests: 100,
   keyPrefix: "api",
-  message: "Terlalu banyak request API. Silakan coba lagi nanti.",
+  message: "Too many API requests. Please try again later.",
 });
 
 // Relaxed rate limit for chat messages (30 per minute)
@@ -137,7 +137,7 @@ export const chatMessageRateLimit = rateLimit({
   windowMs: 60 * 1000,
   maxRequests: 30,
   keyPrefix: "chat",
-  message: "Anda mengirim pesan terlalu cepat. Harap tunggu sebentar.",
+  message: "You are sending messages too fast. Please wait a moment.",
 });
 
 // Very strict rate limit for file uploads (10 per minute)
@@ -145,5 +145,5 @@ export const uploadRateLimit = rateLimit({
   windowMs: 60 * 1000,
   maxRequests: 10,
   keyPrefix: "upload",
-  message: "Terlalu banyak upload. Silakan coba lagi nanti.",
+  message: "Too many uploads. Please try again later.",
 });

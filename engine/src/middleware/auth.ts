@@ -17,7 +17,7 @@ export async function authMiddleware(
     return {
       success: false,
       response: Response.json(
-        { success: false, message: "Token tidak ditemukan" },
+        { success: false, message: "Token not found" },
         { status: 401 }
       ),
     };
@@ -30,7 +30,7 @@ export async function authMiddleware(
     return {
       success: false,
       response: Response.json(
-        { success: false, message: "Token tidak valid atau sudah kadaluarsa" },
+        { success: false, message: "Invalid or expired token" },
         { status: 401 }
       ),
     };
@@ -60,7 +60,7 @@ export function requireRole(...roles: ("admin" | "cs")[]) {
       return {
         success: false,
         response: Response.json(
-          { success: false, message: "Akses ditolak" },
+          { success: false, message: "Access denied" },
           { status: 403 }
         ),
       };

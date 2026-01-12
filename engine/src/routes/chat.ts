@@ -87,7 +87,7 @@ export async function handleChatInit(req: Request): Promise<Response> {
   } catch (error) {
     console.error("[Chat] Init error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -105,7 +105,7 @@ export async function handleGetSession(req: Request): Promise<Response> {
 
     if (!token) {
       return Response.json(
-        { success: false, message: "Token tidak valid" },
+        { success: false, message: "Invalid token" },
         { status: 400 }
       );
     }
@@ -114,7 +114,7 @@ export async function handleGetSession(req: Request): Promise<Response> {
 
     if (!session) {
       return Response.json(
-        { success: false, message: "Sesi tidak ditemukan" },
+        { success: false, message: "Session not found" },
         { status: 404 }
       );
     }
@@ -161,7 +161,7 @@ export async function handleGetSession(req: Request): Promise<Response> {
   } catch (error) {
     console.error("[Chat] Get session error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -178,14 +178,14 @@ export async function handleSubmitRating(req: Request): Promise<Response> {
 
     if (!customerToken) {
       return Response.json(
-        { success: false, message: "Token tidak valid" },
+        { success: false, message: "Invalid token" },
         { status: 400 }
       );
     }
 
     if (!rating || rating < 1 || rating > 5) {
       return Response.json(
-        { success: false, message: "Rating harus antara 1-5" },
+        { success: false, message: "Rating must be between 1-5" },
         { status: 400 }
       );
     }
@@ -194,19 +194,19 @@ export async function handleSubmitRating(req: Request): Promise<Response> {
 
     if (!result) {
       return Response.json(
-        { success: false, message: "Sesi tidak ditemukan atau belum selesai" },
+        { success: false, message: "Session not found atau belum selesai" },
         { status: 400 }
       );
     }
 
     return Response.json({
       success: true,
-      message: "Rating berhasil disimpan",
+      message: "Rating saved successfully",
     });
   } catch (error) {
     console.error("[Chat] Submit rating error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -231,7 +231,7 @@ export async function handleGetQueue(req: Request): Promise<Response> {
   } catch (error) {
     console.error("[Chat] Get queue error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }

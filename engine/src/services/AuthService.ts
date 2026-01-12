@@ -20,17 +20,17 @@ export async function login(username: string, password: string): Promise<LoginRe
   });
 
   if (!user) {
-    return { success: false, message: "Username atau password salah" };
+    return { success: false, message: "Invalid username or password" };
   }
 
   if (!user.isActive) {
-    return { success: false, message: "Akun tidak aktif" };
+    return { success: false, message: "Account is inactive" };
   }
 
   // Verify password
   const isValidPassword = await Bun.password.verify(password, user.passwordHash);
   if (!isValidPassword) {
-    return { success: false, message: "Username atau password salah" };
+    return { success: false, message: "Invalid username or password" };
   }
 
   // Generate JWT token
@@ -65,7 +65,7 @@ export async function login(username: string, password: string): Promise<LoginRe
 
   return {
     success: true,
-    message: "Login berhasil",
+    message: "Login successful",
     token,
     user: {
       id: user.id,

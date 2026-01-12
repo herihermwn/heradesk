@@ -51,14 +51,14 @@ export async function handleCsSetStatus(
 
     if (!userId) {
       ws.send(
-        JSON.stringify(createErrorMessage("UNAUTHORIZED", "Tidak terautentikasi"))
+        JSON.stringify(createErrorMessage("UNAUTHORIZED", "Not authenticated"))
       );
       return;
     }
 
     if (!["online", "offline", "busy"].includes(status)) {
       ws.send(
-        JSON.stringify(createErrorMessage("INVALID_STATUS", "Status tidak valid"))
+        JSON.stringify(createErrorMessage("INVALID_STATUS", "Invalid status"))
       );
       return;
     }
@@ -111,7 +111,7 @@ export async function handleCsSetStatus(
   } catch (error) {
     console.error("[WebSocket] CS set status error:", error);
     ws.send(
-      JSON.stringify(createErrorMessage("SERVER_ERROR", "Terjadi kesalahan server"))
+      JSON.stringify(createErrorMessage("SERVER_ERROR", "Server error occurred"))
     );
   }
 }
@@ -130,7 +130,7 @@ export async function handleCsAcceptChat(
 
     if (!userId) {
       ws.send(
-        JSON.stringify(createErrorMessage("UNAUTHORIZED", "Tidak terautentikasi"))
+        JSON.stringify(createErrorMessage("UNAUTHORIZED", "Not authenticated"))
       );
       return;
     }
@@ -140,7 +140,7 @@ export async function handleCsAcceptChat(
     if (!csStatus || csStatus.status !== "online") {
       ws.send(
         JSON.stringify(
-          createErrorMessage("NOT_ONLINE", "Anda harus online untuk menerima chat")
+          createErrorMessage("NOT_ONLINE", "You must be online to accept chats")
         )
       );
       return;
@@ -149,7 +149,7 @@ export async function handleCsAcceptChat(
     if (csStatus.currentChats >= csStatus.maxChats) {
       ws.send(
         JSON.stringify(
-          createErrorMessage("AT_CAPACITY", "Anda sudah mencapai batas chat maksimal")
+          createErrorMessage("AT_CAPACITY", "You have reached the maximum chat limit")
         )
       );
       return;
@@ -160,7 +160,7 @@ export async function handleCsAcceptChat(
     if (!session) {
       ws.send(
         JSON.stringify(
-          createErrorMessage("SESSION_NOT_FOUND", "Chat tidak ditemukan")
+          createErrorMessage("SESSION_NOT_FOUND", "Chat not found")
         )
       );
       return;
@@ -169,7 +169,7 @@ export async function handleCsAcceptChat(
     if (session.status !== "waiting") {
       ws.send(
         JSON.stringify(
-          createErrorMessage("ALREADY_ASSIGNED", "Chat sudah ditangani CS lain")
+          createErrorMessage("ALREADY_ASSIGNED", "Chat is already being handled by another CS")
         )
       );
       return;
@@ -205,7 +205,7 @@ export async function handleCsAcceptChat(
   } catch (error) {
     console.error("[WebSocket] CS accept chat error:", error);
     ws.send(
-      JSON.stringify(createErrorMessage("SERVER_ERROR", "Terjadi kesalahan server"))
+      JSON.stringify(createErrorMessage("SERVER_ERROR", "Server error occurred"))
     );
   }
 }
@@ -224,14 +224,14 @@ export async function handleCsSendMessage(
 
     if (!userId) {
       ws.send(
-        JSON.stringify(createErrorMessage("UNAUTHORIZED", "Tidak terautentikasi"))
+        JSON.stringify(createErrorMessage("UNAUTHORIZED", "Not authenticated"))
       );
       return;
     }
 
     if (!content || content.trim() === "") {
       ws.send(
-        JSON.stringify(createErrorMessage("EMPTY_MESSAGE", "Pesan tidak boleh kosong"))
+        JSON.stringify(createErrorMessage("EMPTY_MESSAGE", "Message cannot be empty"))
       );
       return;
     }
@@ -241,7 +241,7 @@ export async function handleCsSendMessage(
     if (!session || session.assignedCsId !== userId) {
       ws.send(
         JSON.stringify(
-          createErrorMessage("NOT_ASSIGNED", "Anda tidak memiliki akses ke chat ini")
+          createErrorMessage("NOT_ASSIGNED", "You don't have access to this chat")
         )
       );
       return;
@@ -259,7 +259,7 @@ export async function handleCsSendMessage(
     if (!result.success) {
       ws.send(
         JSON.stringify(
-          createErrorMessage("SEND_FAILED", result.message || "Gagal mengirim pesan")
+          createErrorMessage("SEND_FAILED", result.message || "Failed to send message")
         )
       );
       return;
@@ -290,7 +290,7 @@ export async function handleCsSendMessage(
   } catch (error) {
     console.error("[WebSocket] CS send message error:", error);
     ws.send(
-      JSON.stringify(createErrorMessage("SERVER_ERROR", "Terjadi kesalahan server"))
+      JSON.stringify(createErrorMessage("SERVER_ERROR", "Server error occurred"))
     );
   }
 }
@@ -332,7 +332,7 @@ export async function handleCsResolveChat(
 
     if (!userId) {
       ws.send(
-        JSON.stringify(createErrorMessage("UNAUTHORIZED", "Tidak terautentikasi"))
+        JSON.stringify(createErrorMessage("UNAUTHORIZED", "Not authenticated"))
       );
       return;
     }
@@ -345,7 +345,7 @@ export async function handleCsResolveChat(
         JSON.stringify(
           createErrorMessage(
             "RESOLVE_FAILED",
-            "Gagal menyelesaikan chat atau bukan milik Anda"
+            "Failed to resolve chat or not assigned to you"
           )
         )
       );
@@ -372,7 +372,7 @@ export async function handleCsResolveChat(
   } catch (error) {
     console.error("[WebSocket] CS resolve chat error:", error);
     ws.send(
-      JSON.stringify(createErrorMessage("SERVER_ERROR", "Terjadi kesalahan server"))
+      JSON.stringify(createErrorMessage("SERVER_ERROR", "Server error occurred"))
     );
   }
 }
@@ -391,7 +391,7 @@ export async function handleCsTransferChat(
 
     if (!userId) {
       ws.send(
-        JSON.stringify(createErrorMessage("UNAUTHORIZED", "Tidak terautentikasi"))
+        JSON.stringify(createErrorMessage("UNAUTHORIZED", "Not authenticated"))
       );
       return;
     }
@@ -401,7 +401,7 @@ export async function handleCsTransferChat(
     if (!targetCsStatus || targetCsStatus.status !== "online") {
       ws.send(
         JSON.stringify(
-          createErrorMessage("TARGET_NOT_ONLINE", "CS tujuan tidak online")
+          createErrorMessage("TARGET_NOT_ONLINE", "Target CS is not online")
         )
       );
       return;
@@ -410,7 +410,7 @@ export async function handleCsTransferChat(
     if (targetCsStatus.currentChats >= targetCsStatus.maxChats) {
       ws.send(
         JSON.stringify(
-          createErrorMessage("TARGET_AT_CAPACITY", "CS tujuan sudah penuh")
+          createErrorMessage("TARGET_AT_CAPACITY", "Target CS is at capacity")
         )
       );
       return;
@@ -424,7 +424,7 @@ export async function handleCsTransferChat(
         JSON.stringify(
           createErrorMessage(
             "TRANSFER_FAILED",
-            "Gagal transfer chat atau bukan milik Anda"
+            "Failed to transfer chat or not assigned to you"
           )
         )
       );
@@ -456,7 +456,7 @@ export async function handleCsTransferChat(
   } catch (error) {
     console.error("[WebSocket] CS transfer chat error:", error);
     ws.send(
-      JSON.stringify(createErrorMessage("SERVER_ERROR", "Terjadi kesalahan server"))
+      JSON.stringify(createErrorMessage("SERVER_ERROR", "Server error occurred"))
     );
   }
 }

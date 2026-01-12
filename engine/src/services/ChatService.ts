@@ -82,14 +82,14 @@ export async function initChat(
       data: {
         sessionId: session.id,
         senderType: "system",
-        content: "Chat dimulai. Menunggu customer service...",
+        content: "Chat started. Waiting for customer service...",
         messageType: "system",
       },
     });
 
     return {
       success: true,
-      message: "Chat berhasil dimulai",
+      message: "Chat started successfully",
       sessionId: session.id,
       customerToken,
     };
@@ -97,7 +97,7 @@ export async function initChat(
     console.error("[ChatService] Init chat error:", error);
     return {
       success: false,
-      message: "Gagal memulai chat",
+      message: "Failed to start chat",
     };
   }
 }
@@ -280,7 +280,7 @@ export async function assignChat(sessionId: string, csId: string) {
     data: {
       sessionId,
       senderType: "system",
-      content: `${session.assignedCs?.name || "Customer Service"} bergabung ke chat`,
+      content: `${session.assignedCs?.name || "Customer Service"} has joined the chat`,
       messageType: "system",
     },
   });
@@ -322,7 +322,7 @@ export async function resolveChat(sessionId: string, csId: string) {
     data: {
       sessionId,
       senderType: "system",
-      content: "Chat telah selesai",
+      content: "Chat has been resolved",
       messageType: "system",
     },
   });
@@ -390,7 +390,7 @@ export async function transferChat(
     data: {
       sessionId,
       senderType: "system",
-      content: `Chat dialihkan ke ${newCs.name}`,
+      content: `Chat transferred to ${newCs.name}`,
       messageType: "system",
     },
   });
@@ -433,7 +433,7 @@ export async function endChat(sessionId: string) {
       data: {
         sessionId,
         senderType: "system",
-        content: "Customer meninggalkan chat",
+        content: "Customer has left the chat",
         messageType: "system",
       },
     });
@@ -489,11 +489,11 @@ export async function sendMessage(
     });
 
     if (!session) {
-      return { success: false, message: "Sesi chat tidak ditemukan" };
+      return { success: false, message: "Chat session not found" };
     }
 
     if (session.status !== "waiting" && session.status !== "active") {
-      return { success: false, message: "Chat sudah selesai" };
+      return { success: false, message: "Chat has ended" };
     }
 
     const message = await prisma.message.create({
@@ -508,12 +508,12 @@ export async function sendMessage(
 
     return {
       success: true,
-      message: "Pesan terkirim",
+      message: "Message sent",
       messageId: message.id,
     };
   } catch (error) {
     console.error("[ChatService] Send message error:", error);
-    return { success: false, message: "Gagal mengirim pesan" };
+    return { success: false, message: "Failed to send message" };
   }
 }
 

@@ -63,7 +63,7 @@ export async function handleGetUsers(req: Request): Promise<Response> {
   } catch (error) {
     console.error("[Admin] Get users error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -89,7 +89,7 @@ export async function handleGetUserById(req: Request): Promise<Response> {
 
     if (!userId) {
       return Response.json(
-        { success: false, message: "User ID tidak valid" },
+        { success: false, message: "Invalid user ID" },
         { status: 400 }
       );
     }
@@ -98,7 +98,7 @@ export async function handleGetUserById(req: Request): Promise<Response> {
 
     if (!user) {
       return Response.json(
-        { success: false, message: "User tidak ditemukan" },
+        { success: false, message: "User not found" },
         { status: 404 }
       );
     }
@@ -110,7 +110,7 @@ export async function handleGetUserById(req: Request): Promise<Response> {
   } catch (error) {
     console.error("[Admin] Get user error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -135,14 +135,14 @@ export async function handleCreateUser(req: Request): Promise<Response> {
 
     if (!username || !password || !name || !role) {
       return Response.json(
-        { success: false, message: "Data tidak lengkap" },
+        { success: false, message: "Incomplete data" },
         { status: 400 }
       );
     }
 
     if (!["admin", "cs"].includes(role)) {
       return Response.json(
-        { success: false, message: "Role tidak valid" },
+        { success: false, message: "Invalid role" },
         { status: 400 }
       );
     }
@@ -164,13 +164,13 @@ export async function handleCreateUser(req: Request): Promise<Response> {
 
     return Response.json({
       success: true,
-      message: "User berhasil dibuat",
+      message: "User created successfully",
       user: result.user,
     });
   } catch (error) {
     console.error("[Admin] Create user error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -196,7 +196,7 @@ export async function handleUpdateUser(req: Request): Promise<Response> {
 
     if (!userId) {
       return Response.json(
-        { success: false, message: "User ID tidak valid" },
+        { success: false, message: "Invalid user ID" },
         { status: 400 }
       );
     }
@@ -213,13 +213,13 @@ export async function handleUpdateUser(req: Request): Promise<Response> {
 
     return Response.json({
       success: true,
-      message: "User berhasil diperbarui",
+      message: "User updated successfully",
       user: result.user,
     });
   } catch (error) {
     console.error("[Admin] Update user error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -245,7 +245,7 @@ export async function handleDeleteUser(req: Request): Promise<Response> {
 
     if (!userId) {
       return Response.json(
-        { success: false, message: "User ID tidak valid" },
+        { success: false, message: "Invalid user ID" },
         { status: 400 }
       );
     }
@@ -253,7 +253,7 @@ export async function handleDeleteUser(req: Request): Promise<Response> {
     // Prevent self-deletion
     if (userId === admin.userId) {
       return Response.json(
-        { success: false, message: "Anda tidak dapat menghapus akun sendiri" },
+        { success: false, message: "You cannot delete your own account" },
         { status: 400 }
       );
     }
@@ -269,12 +269,12 @@ export async function handleDeleteUser(req: Request): Promise<Response> {
 
     return Response.json({
       success: true,
-      message: "User berhasil dihapus",
+      message: "User deleted successfully",
     });
   } catch (error) {
     console.error("[Admin] Delete user error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -330,7 +330,7 @@ export async function handleGetAllChats(req: Request): Promise<Response> {
   } catch (error) {
     console.error("[Admin] Get all chats error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -356,7 +356,7 @@ export async function handleGetChatById(req: Request): Promise<Response> {
 
     if (!chatId) {
       return Response.json(
-        { success: false, message: "Chat ID tidak valid" },
+        { success: false, message: "Invalid chat ID" },
         { status: 400 }
       );
     }
@@ -365,7 +365,7 @@ export async function handleGetChatById(req: Request): Promise<Response> {
 
     if (!chat) {
       return Response.json(
-        { success: false, message: "Chat tidak ditemukan" },
+        { success: false, message: "Chat not found" },
         { status: 404 }
       );
     }
@@ -395,7 +395,7 @@ export async function handleGetChatById(req: Request): Promise<Response> {
   } catch (error) {
     console.error("[Admin] Get chat by ID error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -438,7 +438,7 @@ export async function handleGetStats(req: Request): Promise<Response> {
   } catch (error) {
     console.error("[Admin] Get stats error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -479,7 +479,7 @@ export async function handleGetCsStatus(req: Request): Promise<Response> {
   } catch (error) {
     console.error("[Admin] Get CS status error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -540,7 +540,7 @@ export async function handleGetLogs(req: Request): Promise<Response> {
   } catch (error) {
     console.error("[Admin] Get logs error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -571,8 +571,8 @@ export async function handleGetSettings(req: Request): Promise<Response> {
       businessHoursEnabled: false,
       businessHoursStart: "08:00",
       businessHoursEnd: "17:00",
-      offlineMessage: "Terima kasih sudah menghubungi kami. Saat ini kami sedang offline. Silakan tinggalkan pesan dan kami akan menghubungi Anda segera.",
-      welcomeMessage: "Halo! Selamat datang di layanan kami. Ada yang bisa kami bantu?",
+      offlineMessage: "Thank you for contacting us. We are currently offline. Please leave a message and we will get back to you soon.",
+      welcomeMessage: "Hello! Welcome to our service. How can we help you?",
     };
 
     return Response.json({
@@ -582,7 +582,7 @@ export async function handleGetSettings(req: Request): Promise<Response> {
   } catch (error) {
     console.error("[Admin] Get settings error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -616,13 +616,13 @@ export async function handleUpdateSettings(req: Request): Promise<Response> {
 
     return Response.json({
       success: true,
-      message: "Pengaturan berhasil diperbarui",
+      message: "Settings updated successfully",
       settings: body,
     });
   } catch (error) {
     console.error("[Admin] Update settings error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -658,7 +658,7 @@ export async function handleGetAllCannedResponses(req: Request): Promise<Respons
   } catch (error) {
     console.error("[Admin] Get canned responses error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -683,7 +683,7 @@ export async function handleCreateGlobalCannedResponse(req: Request): Promise<Re
 
     if (!title || !content) {
       return Response.json(
-        { success: false, message: "Title dan content wajib diisi" },
+        { success: false, message: "Title and content are required" },
         { status: 400 }
       );
     }
@@ -701,13 +701,13 @@ export async function handleCreateGlobalCannedResponse(req: Request): Promise<Re
 
     return Response.json({
       success: true,
-      message: "Canned response berhasil dibuat",
+      message: "Canned response created successfully",
       response,
     });
   } catch (error) {
     console.error("[Admin] Create canned response error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -733,7 +733,7 @@ export async function handleUpdateCannedResponse(req: Request): Promise<Response
 
     if (!responseId) {
       return Response.json(
-        { success: false, message: "ID tidak valid" },
+        { success: false, message: "Invalid ID" },
         { status: 400 }
       );
     }
@@ -753,13 +753,13 @@ export async function handleUpdateCannedResponse(req: Request): Promise<Response
 
     return Response.json({
       success: true,
-      message: "Canned response berhasil diperbarui",
+      message: "Canned response updated successfully",
       response,
     });
   } catch (error) {
     console.error("[Admin] Update canned response error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -785,7 +785,7 @@ export async function handleDeleteCannedResponse(req: Request): Promise<Response
 
     if (!responseId) {
       return Response.json(
-        { success: false, message: "ID tidak valid" },
+        { success: false, message: "Invalid ID" },
         { status: 400 }
       );
     }
@@ -796,12 +796,12 @@ export async function handleDeleteCannedResponse(req: Request): Promise<Response
 
     return Response.json({
       success: true,
-      message: "Canned response berhasil dihapus",
+      message: "Canned response deleted successfully",
     });
   } catch (error) {
     console.error("[Admin] Delete canned response error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }

@@ -7,7 +7,7 @@ export async function handleLogin(req: Request): Promise<Response> {
 
     if (!username || !password) {
       return Response.json(
-        { success: false, message: "Username dan password harus diisi" },
+        { success: false, message: "Username and password are required" },
         { status: 400 }
       );
     }
@@ -30,7 +30,7 @@ export async function handleLogin(req: Request): Promise<Response> {
   } catch (error) {
     console.error("[Auth] Login error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -41,7 +41,7 @@ export async function handleLogout(req: Request): Promise<Response> {
     const authHeader = req.headers.get("Authorization");
     if (!authHeader?.startsWith("Bearer ")) {
       return Response.json(
-        { success: false, message: "Token tidak valid" },
+        { success: false, message: "Invalid token" },
         { status: 401 }
       );
     }
@@ -51,7 +51,7 @@ export async function handleLogout(req: Request): Promise<Response> {
 
     if (!payload) {
       return Response.json(
-        { success: false, message: "Token tidak valid" },
+        { success: false, message: "Invalid token" },
         { status: 401 }
       );
     }
@@ -60,12 +60,12 @@ export async function handleLogout(req: Request): Promise<Response> {
 
     return Response.json({
       success: true,
-      message: "Logout berhasil",
+      message: "Logout successful",
     });
   } catch (error) {
     console.error("[Auth] Logout error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }
@@ -76,7 +76,7 @@ export async function handleGetMe(req: Request): Promise<Response> {
     const authHeader = req.headers.get("Authorization");
     if (!authHeader?.startsWith("Bearer ")) {
       return Response.json(
-        { success: false, message: "Token tidak valid" },
+        { success: false, message: "Invalid token" },
         { status: 401 }
       );
     }
@@ -86,7 +86,7 @@ export async function handleGetMe(req: Request): Promise<Response> {
 
     if (!payload) {
       return Response.json(
-        { success: false, message: "Token tidak valid atau sudah kadaluarsa" },
+        { success: false, message: "Invalid or expired token" },
         { status: 401 }
       );
     }
@@ -95,7 +95,7 @@ export async function handleGetMe(req: Request): Promise<Response> {
 
     if (!user) {
       return Response.json(
-        { success: false, message: "User tidak ditemukan" },
+        { success: false, message: "User not found" },
         { status: 404 }
       );
     }
@@ -107,7 +107,7 @@ export async function handleGetMe(req: Request): Promise<Response> {
   } catch (error) {
     console.error("[Auth] GetMe error:", error);
     return Response.json(
-      { success: false, message: "Terjadi kesalahan server" },
+      { success: false, message: "Server error occurred" },
       { status: 500 }
     );
   }

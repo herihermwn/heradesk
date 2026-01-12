@@ -50,7 +50,7 @@ export async function handleCustomerStartChat(
     if (!result.success || !result.sessionId || !result.customerToken) {
       ws.send(
         JSON.stringify(
-          createErrorMessage("INIT_FAILED", result.message || "Gagal memulai chat")
+          createErrorMessage("INIT_FAILED", result.message || "Failed to start chat")
         )
       );
       return;
@@ -104,7 +104,7 @@ export async function handleCustomerStartChat(
   } catch (error) {
     console.error("[WebSocket] Customer start chat error:", error);
     ws.send(
-      JSON.stringify(createErrorMessage("SERVER_ERROR", "Terjadi kesalahan server"))
+      JSON.stringify(createErrorMessage("SERVER_ERROR", "Server error occurred"))
     );
   }
 }
@@ -123,14 +123,14 @@ export async function handleCustomerSendMessage(
     // Validate session
     if (!sessionId || sessionId !== ws.data.sessionId) {
       ws.send(
-        JSON.stringify(createErrorMessage("INVALID_SESSION", "Sesi tidak valid"))
+        JSON.stringify(createErrorMessage("INVALID_SESSION", "Invalid session"))
       );
       return;
     }
 
     if (!content || content.trim() === "") {
       ws.send(
-        JSON.stringify(createErrorMessage("EMPTY_MESSAGE", "Pesan tidak boleh kosong"))
+        JSON.stringify(createErrorMessage("EMPTY_MESSAGE", "Message cannot be empty"))
       );
       return;
     }
@@ -147,7 +147,7 @@ export async function handleCustomerSendMessage(
     if (!result.success) {
       ws.send(
         JSON.stringify(
-          createErrorMessage("SEND_FAILED", result.message || "Gagal mengirim pesan")
+          createErrorMessage("SEND_FAILED", result.message || "Failed to send message")
         )
       );
       return;
@@ -183,7 +183,7 @@ export async function handleCustomerSendMessage(
   } catch (error) {
     console.error("[WebSocket] Customer send message error:", error);
     ws.send(
-      JSON.stringify(createErrorMessage("SERVER_ERROR", "Terjadi kesalahan server"))
+      JSON.stringify(createErrorMessage("SERVER_ERROR", "Server error occurred"))
     );
   }
 }
@@ -225,7 +225,7 @@ export async function handleCustomerEndChat(
     // Validate session
     if (!sessionId || sessionId !== ws.data.sessionId) {
       ws.send(
-        JSON.stringify(createErrorMessage("INVALID_SESSION", "Sesi tidak valid"))
+        JSON.stringify(createErrorMessage("INVALID_SESSION", "Invalid session"))
       );
       return;
     }
@@ -239,7 +239,7 @@ export async function handleCustomerEndChat(
 
     if (!result) {
       ws.send(
-        JSON.stringify(createErrorMessage("END_FAILED", "Gagal mengakhiri chat"))
+        JSON.stringify(createErrorMessage("END_FAILED", "Failed to end chat"))
       );
       return;
     }
@@ -261,7 +261,7 @@ export async function handleCustomerEndChat(
   } catch (error) {
     console.error("[WebSocket] Customer end chat error:", error);
     ws.send(
-      JSON.stringify(createErrorMessage("SERVER_ERROR", "Terjadi kesalahan server"))
+      JSON.stringify(createErrorMessage("SERVER_ERROR", "Server error occurred"))
     );
   }
 }
@@ -280,7 +280,7 @@ export async function handleCustomerRating(
     // Validate
     if (!ws.data.customerToken) {
       ws.send(
-        JSON.stringify(createErrorMessage("INVALID_SESSION", "Sesi tidak valid"))
+        JSON.stringify(createErrorMessage("INVALID_SESSION", "Invalid session"))
       );
       return;
     }
@@ -288,7 +288,7 @@ export async function handleCustomerRating(
     if (!rating || rating < 1 || rating > 5) {
       ws.send(
         JSON.stringify(
-          createErrorMessage("INVALID_RATING", "Rating harus antara 1-5")
+          createErrorMessage("INVALID_RATING", "Rating must be between 1-5")
         )
       );
       return;
@@ -300,7 +300,7 @@ export async function handleCustomerRating(
     if (!result) {
       ws.send(
         JSON.stringify(
-          createErrorMessage("RATING_FAILED", "Gagal menyimpan rating")
+          createErrorMessage("RATING_FAILED", "Failed to save rating")
         )
       );
       return;
@@ -318,7 +318,7 @@ export async function handleCustomerRating(
   } catch (error) {
     console.error("[WebSocket] Customer rating error:", error);
     ws.send(
-      JSON.stringify(createErrorMessage("SERVER_ERROR", "Terjadi kesalahan server"))
+      JSON.stringify(createErrorMessage("SERVER_ERROR", "Server error occurred"))
     );
   }
 }
@@ -366,7 +366,7 @@ export async function handleCustomerReconnect(
     if (!session) {
       ws.send(
         JSON.stringify(
-          createErrorMessage("SESSION_NOT_FOUND", "Sesi tidak ditemukan")
+          createErrorMessage("SESSION_NOT_FOUND", "Session not found")
         )
       );
       return false;
@@ -395,7 +395,7 @@ export async function handleCustomerReconnect(
   } catch (error) {
     console.error("[WebSocket] Customer reconnect error:", error);
     ws.send(
-      JSON.stringify(createErrorMessage("SERVER_ERROR", "Terjadi kesalahan server"))
+      JSON.stringify(createErrorMessage("SERVER_ERROR", "Server error occurred"))
     );
     return false;
   }

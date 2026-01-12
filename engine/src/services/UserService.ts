@@ -53,7 +53,7 @@ export async function createUser(input: CreateUserInput) {
   });
 
   if (existing) {
-    return { success: false, message: "Username sudah digunakan" };
+    return { success: false, message: "Username is already taken" };
   }
 
   // Hash password
@@ -274,7 +274,7 @@ export async function updateUser(userId: string, input: UpdateUserInput) {
   });
 
   if (!existing) {
-    return { success: false, message: "User tidak ditemukan" };
+    return { success: false, message: "User not found" };
   }
 
   // Check username uniqueness if changing
@@ -283,7 +283,7 @@ export async function updateUser(userId: string, input: UpdateUserInput) {
       where: { username: input.username },
     });
     if (usernameExists) {
-      return { success: false, message: "Username sudah digunakan" };
+      return { success: false, message: "Username is already taken" };
     }
   }
 
@@ -358,7 +358,7 @@ export async function deleteUser(userId: string) {
   });
 
   if (!user) {
-    return { success: false, message: "User tidak ditemukan" };
+    return { success: false, message: "User not found" };
   }
 
   // Soft delete
@@ -383,7 +383,7 @@ export async function deleteUser(userId: string) {
     },
   });
 
-  return { success: true, message: "User berhasil dihapus" };
+  return { success: true, message: "User deleted successfully" };
 }
 
 /**
@@ -395,14 +395,14 @@ export async function hardDeleteUser(userId: string) {
   });
 
   if (!user) {
-    return { success: false, message: "User tidak ditemukan" };
+    return { success: false, message: "User not found" };
   }
 
   await prisma.user.delete({
     where: { id: userId },
   });
 
-  return { success: true, message: "User berhasil dihapus permanen" };
+  return { success: true, message: "User permanently deleted" };
 }
 
 // ============================================

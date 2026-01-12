@@ -218,7 +218,7 @@ export async function checkIdleChats() {
         data: {
           sessionId: chat.id,
           senderType: "system",
-          content: "Chat ditutup karena tidak ada aktivitas",
+          content: "Chat closed due to inactivity",
           messageType: "system",
         },
       });
