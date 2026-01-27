@@ -178,21 +178,16 @@ export const csApi = {
     if (params?.limit) queryParams.set("limit", params.limit.toString());
 
     const query = queryParams.toString();
-    const response = await fetch(`${API_BASE_URL}/cs/history${query ? `?${query}` : ""}`, {
-      headers: {
-        "Content-Type": "application/json",
-        ...(getAuthToken() ? { Authorization: `Bearer ${getAuthToken()}` } : {}),
-      },
-    });
-
-    const result = await response.json();
+    const result = await request<{ chats: ChatSession[]; total: number; page: number; totalPages: number }>(
+      `/cs/history${query ? `?${query}` : ""}`
+    );
 
     return {
       success: result.success,
-      data: result.chats,
-      total: result.total,
-      page: result.page,
-      totalPages: result.totalPages,
+      data: (result as { chats?: ChatSession[] }).chats,
+      total: (result as { total?: number }).total,
+      page: (result as { page?: number }).page,
+      totalPages: (result as { totalPages?: number }).totalPages,
       message: result.message,
     };
   },
