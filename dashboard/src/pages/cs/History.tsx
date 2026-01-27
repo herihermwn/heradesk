@@ -168,33 +168,43 @@ function ChatDetailModal({ chat, onClose }: ChatDetailModalProps) {
               <div
                 key={message.id}
                 className={`flex ${
-                  message.senderType === "cs" ? "justify-end" : "justify-start"
+                  message.senderType === "cs"
+                    ? "justify-end"
+                    : message.senderType === "system"
+                    ? "justify-center"
+                    : "justify-start"
                 }`}
               >
                 <div
-                  className={`max-w-[80%] px-4 py-2 rounded-lg ${
+                  className={`${
+                    message.senderType === "system"
+                      ? "text-xs px-3 py-1 rounded-full"
+                      : "max-w-[80%] px-4 py-2 rounded-lg"
+                  } ${
                     message.senderType === "cs"
                       ? "bg-primary-500 text-white"
                       : message.senderType === "system"
-                      ? "bg-gray-100 text-gray-600 text-sm italic"
+                      ? "bg-gray-100 text-gray-600 italic"
                       : "bg-gray-100 text-gray-800"
                   }`}
                 >
                   <p className="whitespace-pre-wrap break-words">
                     {message.content}
                   </p>
-                  <p
-                    className={`text-xs mt-1 ${
-                      message.senderType === "cs"
-                        ? "text-primary-200"
-                        : "text-gray-500"
-                    }`}
-                  >
-                    {new Date(message.createdAt).toLocaleTimeString("id-ID", {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </p>
+                  {message.senderType !== "system" && (
+                    <p
+                      className={`text-xs mt-1 ${
+                        message.senderType === "cs"
+                          ? "text-primary-200"
+                          : "text-gray-500"
+                      }`}
+                    >
+                      {new Date(message.createdAt).toLocaleTimeString("id-ID", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </p>
+                  )}
                 </div>
               </div>
             ))
