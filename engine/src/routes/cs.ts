@@ -293,8 +293,10 @@ export async function handleGetCsHistory(req: Request): Promise<Response> {
         customerName: chat.customerName,
         customerEmail: chat.customerEmail,
         status: chat.status,
+        createdAt: chat.createdAt,
         resolvedAt: chat.resolvedAt,
         rating: chat.rating,
+        _count: chat._count,
         lastMessage: chat.messages[0]
           ? {
               content: chat.messages[0].content,
