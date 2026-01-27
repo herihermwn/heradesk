@@ -423,9 +423,15 @@ function CsHistoryPage() {
         setState((prev) => ({
           ...prev,
           chats: page === 1 ? response.data! : [...prev.chats, ...response.data!],
-          hasMore: response.data!.length === 20,
+          hasMore: page < (response.totalPages || 1),
           page,
           isLoading: false,
+        }));
+      } else {
+        setState((prev) => ({
+          ...prev,
+          isLoading: false,
+          error: response.message || "Failed to load history",
         }));
       }
     } catch (error) {
