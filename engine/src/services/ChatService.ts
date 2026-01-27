@@ -226,6 +226,9 @@ export async function getChatHistoryForCS(
           take: 1,
           orderBy: { createdAt: "desc" },
         },
+        _count: {
+          select: { messages: true },
+        },
       },
     }),
     prisma.chatSession.count({
